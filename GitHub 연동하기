@@ -1,7 +1,7 @@
 GitHub 연동하기
 http://unikys.tistory.com/323 여기보세요~
 
-<img width="700" height="92" src="./git_flow.png">
+<img width="700" height="92" src="./git_flow.png"></img>
 
 working directory
  - 실제 파일들이 있는 Local 저장소
@@ -15,7 +15,7 @@ repository
 
 Staging Area를 왜 사용하는가?
  - 전체 코드 중 일부분만 커밋을 하는 경우
- - 
+
 
 참고
  http://manducku.tistory.com/49
@@ -26,3 +26,17 @@ Staging Area를 왜 사용하는가?
 확인 해야할 것
 GitHub TIL
 Github 블로그
+
+
+글머리 기호 테스트
+* 빨강
+	*녹색
+		*파랑
+
+ + 빨강
+ 	+ 녹색  
+ 		+ 파랑
+
+  - 빨강
+  - 녹색
+  - 파랑ㅇ
