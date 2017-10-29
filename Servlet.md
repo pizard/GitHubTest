@@ -1,8 +1,8 @@
-+ 서블릿(Servlet)
+## **서블릿(Servlet)**
 	+ Server + Let or Server + Applet
 	+ 클라이어느 요청을 처리하고 그 결과를 다시 클라이언트에게 전송하는 Servlet 구현 규칙을 지킨 자바 프로그램
 
-+ 서블릿 컨테이너(Servlet Container)
+## **서블릿 컨테이너(Servlet Container)**
 	+ 서블릿의 생명주기를 관리하고 요청에 따른 스레드 생성
 	+ 역할
 		+ 통신지원
@@ -23,12 +23,12 @@
 	1. 웹서버
 		+ Client/Server 모델과 웹의 HTTP를 이용하여 웹 페이지가 들어 있는 파일을 사용자에게 제공하는 프로그램
 		+ 기능
-			a. Clushering 기능: 사용자 요청이 발생하면 상황에 따라 각각의 WAS에 요청을 넘김
-			b. Cache 기능: css, js, image 등의 리소스 파일을 갖고 이다가 WAS를 거치지 않고 사용자에게 직접 넘김
+			1. Clushering 기능: 사용자 요청이 발생하면 상황에 따라 각각의 WAS에 요청을 넘김
+			2. Cache 기능: css, js, image 등의 리소스 파일을 갖고 이다가 WAS를 거치지 않고 사용자에게 직접 넘김
 		+ Example
-			a. 32비트 윈도우와 유닉스에서 사용할 수 있는 아파치
-			b. 윈도우 NT에 딸려 나오는 IIS
-			c. 넷스케이프의 엔터프라이즈 서버
+			1. 32비트 윈도우와 유닉스에서 사용할 수 있는 아파치
+			2. 윈도우 NT에 딸려 나오는 IIS
+			3. 넷스케이프의 엔터프라이즈 서버
 
 	2. WAS(Web Application Server)
 		+ 웹과 기업의 기간 시스템 사이에 위치하면서 웹 기반 분산 시스템 개발을 쉽게 도와주고 안정적인 트랜잭션 처리를 보장해주는 일종의 미들웨어 소프트웨어 서버
@@ -36,8 +36,8 @@
 		+ Servlet, JSP, ASP, PHP, 동적 데이터
 
 		+ 기능
-			a. Servlet 페이지를 HTML 형태로 변환함, 예를들어 jsp의 경우 jsp를 WAS에서 java class 파일로 컴파일 후 html 형태로 페이지를사용자에게 전달하게 됨, 동적 데이터의 처리
-			b. Container라는 용어로 쓰이며, 초창기는 CGI, 그 후 Servlet, JSP, ASP 등의 프로그램으로 사용
+			1. Servlet 페이지를 HTML 형태로 변환함, 예를들어 jsp의 경우 jsp를 WAS에서 java class 파일로 컴파일 후 html 형태로 페이지를사용자에게 전달하게 됨, 동적 데이터의 처리
+			2. Container라는 용어로 쓰이며, 초창기는 CGI, 그 후 Servlet, JSP, ASP 등의 프로그램으로 사용
 
 		+ 종류
-			a. Tomcat, tMax, jeus, IBM Webapere, JBOSS, Oracle...
+			1. Tomcat, tMax, jeus, IBM Webapere, JBOSS, Oracle...
