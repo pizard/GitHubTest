@@ -13,13 +13,13 @@
 	 - 컴포넌트간의 통신수단
 
  - Manifests
-	 - '<manifest xmlns:android="Java Package의 이름">'
+	 - `<manifest xmlns:android="Java Package의 이름">`
 	 	- AndroidManifest.xml의 root element로써 전체를 감싸는 구조
-<img width="900" height="130" src="../image/Manifests_1.png"></img>
+<img width="700" height="100" src="../image/Manifests_1.png"></img>
 
-	 - '<uses-permission android:name="<permission> 엘리먼트를 사용해 정의된 퍼미션의 이름">'
+	 - `<uses-permission android:name="<permission> 엘리먼트를 사용해 정의된 퍼미션의 이름">`
 		 - 안드로이드가 제공하는 권한 이외에 다른 권한이 필요할 때 정의
-<img width="900" height="225" src="../image/Manifests_2.png"></img>
- 
+<img width="700" height="175" src="../image/Manifests_2.png"></img>
+
  - Intent Filter
 	 - ... 추후 추가 예정
