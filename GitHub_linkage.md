@@ -1,7 +1,7 @@
 GitHub 연동하기
 http://unikys.tistory.com/323 여기보세요~
 
-<img width="700" height="92" src="git_flow.png"></img>
+<img width="700" height="92" src="image/git_flow.png"></img>
 
 working directory
  - 실제 파일들이 있는 Local 저장소
@@ -23,8 +23,8 @@ Staging Area를 왜 사용하는가?
 
 
 확인 해야할 것
-GitHub TIL
-Github 블로그
+ GitHub TIL
+ Github 블로그
 
 
 글머리 기호 테스트
