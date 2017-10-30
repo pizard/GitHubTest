@@ -1,7 +1,7 @@
 GitHub 연동하기
 http://unikys.tistory.com/323 여기보세요~
 
-<img width="700" height="92" src="image/git_flow.png"></img>
+<img width="700" height="92" src="./image/git_flow.png"></img>
 
 working directory
  - 실제 파일들이 있는 Local 저장소
