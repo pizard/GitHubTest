@@ -19,6 +19,7 @@
 
 	 - `<uses-permission android:name="<permission> 엘리먼트를 사용해 정의된 퍼미션의 이름">`
 		 - 안드로이드가 제공하는 권한 이외에 다른 권한이 필요할 때 정의
+		 
 <img width="700" height="175" src="../image/Manifests_2.png"></img>
 
  - Intent Filter

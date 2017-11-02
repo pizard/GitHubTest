@@ -1,0 +1,40 @@
+# ** String / StringBuilder / StringBuffer **
+### 1. String
+ - Immutable(불변성)
+ 	 - 한번 생성되면 할당된 메모리 공간이 변하지 않음
+ 	 - String문자열에 다른 문자열을 붙여도 기존의 문자열에 붙는것이 아니라 새로운 String 객체를 만든 후 연결된 문자열을 저장하고 그 객체를 참조하도록 함
+ 	 - Heap Memory(가비지 컬렉션이 동작하는 영역)에 생성되며, 한번 생성된 객체의 내부 내용을 변화시킬 수 없음
+ - 동기화에 신경쓰지 않아도 괜찮아 내부 데이터를 자유롭게 공유 가능
+
+### 2. StringBuilder vs StringBuffer
+ - 공통점
+	 - 문자열 연산 등으로 기존 객체의 공간이 부족한 경우 버퍼의 크기를 늘리며 유연하게 동작
+ - 차이점
+ 	 - StringBuffer
+ 	 	 - 각 Method 별로 Synchronized Keyword가 존재하여 멀티스레드 환경에서도 동기화를 지원
+ 	 - StringBuilder
+ 	 	 - 동기화를 보장하지 않음
+
+ - Method
+	 - StringBuffer(): 객체 생성
+	 - StringBuffer(CharSequence seq): CharSequence를 매개변수로 받아 객체 생성
+	 - StringBuffer(int capacirt): capacity용량의 객체 생성
+	 - StringBuffer(String str): str을 갖는 객체 생성
+	 - Append(): 기존 값의 맨 끝자리에 값들을 덧붙임
+	 - Insert(): 지정된 위치 이후에 넘어온 값을 덧붙임
+
+### 3. 사용처
+ - String: 짧은 문자열을 더할 때
+ - StringBuffer: 스레드에 안전한 프로그램이 필요할 때나 개발중인 시스템의 부분이 스레드에 안전한지 모를 경우
+ - StringBuilder: 스레드에 안전한지의 여부와 전혀 관계없는 프로그램을 계발하는 경우
+
+### 4. Java Version 별 차이( String str1 = “Here ” + “is ” + i + “ samples.”; )
+ - JDK 1.4: 문자열을 미리 더해 줌 
+	 - String str1 = “Here is” + i + “samples.”;
+	 - 중간에 int와 같은 객체가 들어간다면 재생성한다는 한계가 있음
+ - JDK 1.5이상: 자동으로 StringBuffer로 변환하여 append 한다.
+	 - String str1 = (new String(“Here is ”)).append(i).append(“ samples.”).toString;
+	 - 객체를 계속 추가한다는 한계 존재
+
+
+
