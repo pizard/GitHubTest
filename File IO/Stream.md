@@ -29,6 +29,3 @@
  	 - true : Append, 이어쓰기
  	 - false : Create, 기존 내용에 덮어쓰기
  	 - 기본값 : false
-
-
- - 
