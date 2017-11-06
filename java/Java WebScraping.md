@@ -44,7 +44,7 @@
 		 - name: 끝 태그 String
 
 ### 참고
- - [(카아알) Karl Kyeongan]
-  	 - <http://newmkka.tsitory.com/10>
- - [출처] SAX (Simple API for XML)|작성자 아는남자
- 	 - <http://blog.naver.com/swinter8/130000715438>
+ - [Karl Kyeongan](http://newmkka.tistory.com/10 "Karl Kyeongan")
+ 	 - SAXParserFactory
+ - [아는남자 Blog](http://blog.naver.com/swinter8/130000715438 "아는남자 Blog")
+ 	 - SAXParserFactory(원본)
