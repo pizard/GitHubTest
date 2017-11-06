@@ -19,4 +19,5 @@
  	 - CPU사용률이 높은 어플리케이션
 
 
- <https://velopert.com/133>
+### 참고
+ - [VELOPERT.LOG](https://velopert.com/133 "VELOPERT.LOG")
