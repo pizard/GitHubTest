@@ -68,10 +68,11 @@
 
 
 ### 참고
- - Jbee_Devlog <http://asfirstalways.tistory.com/43>
+
+ - [Jbee_Devlog](http://asfirstalways.tistory.com/43 "Jbee_Devlog")
  	- 웹의 역사
 	- Node.js의 장점
- - 조대협의 블로그 <http://bcho.tistory.com/876>
+ - [조대협의 블로그](http://bcho.tistory.com/876 "조대협의 블로그")
 	 - Node.js의 단점
 	 - 결론
-한장현
+ - 한장현
