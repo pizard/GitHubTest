@@ -35,6 +35,3 @@
  - JDK 1.5이상: 자동으로 StringBuffer로 변환하여 append 한다.
 	 - String str1 = (new String(“Here is ”)).append(i).append(“ samples.”).toString;
 	 - 객체를 계속 추가한다는 한계 존재
-
-
-

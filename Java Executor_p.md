@@ -19,7 +19,7 @@
      
      
 
-<img width="700" height="92" src="../image/Executor API.png"></img>
+<img width="538" height="365" src="./image/Executor API.png"></img>
 ### **주요 클래스와 인터페이스**
  - Executor Interface
  	 - package: java.util.concurrent.Executor
@@ -33,7 +33,7 @@
  - Executor Class
  	 - package: java.util.concurrent.Executors
  	 - ThreadPool Method
- 	 	 - `ExecutorService newFixedThreadPool(int threadCount) // threadCount: Thread수`
+ 	 	`ExecutorService newFixedThreadPool(int threadCount) // threadCount: Thread수`
  	 	 - 처리할 작업이 등록되면 그에 따라 실제 작업할 Thread를 하나씩 생성
  	 	 - 항상 일정한 Thread개수를 유지
  	 	 - Thread가 유휴 상태이더라도 제거하지 않고 유지
@@ -46,5 +46,9 @@
 
 # 어차피 사용하지도 않는거 금방 까먹을거 같아서 나중에 Thread를 사용할 때 다시 정리하겠습니다ㅜㅜ
 
-[linkURL]: http://javacan.tistory.com/entry/134 "Optional String"
-[linkURL]: http://tomining.tistory.com/10 "Optional String"
+### 6. 참고
+ - [자바캔(Java Can Do IT)](http://javacan.tistory.com/entry/134 "자바캔(Java Can Do IT)")
+ - [마이너의 일상](http://tomining.tistory.com/10 "마이너의 일상")
+
+
+
