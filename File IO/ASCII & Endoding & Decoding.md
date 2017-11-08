@@ -1,13 +1,13 @@
-# **Response 객체**
+# Response 객체
 
-## **ASCII**
+## ASCII
  - 0 ~ 32(2^0 ~ 2^4)
  	 - 제어문자, 폰트, 전송의 끝을 알리는 문자 등의 특수한 이벤트를 알림
  - 33 ~ 127(2^5 ~ 2^7)
  	 - 실제 사용되는 문자, !@#abcd...
  - 이때 8개의 bit로 7개만 사용하면 되기 때문에 첫번째 bit의 경우 0으로 비워둔다.
 
-## **Encoding/Decoding**
+## Encoding/Decoding
  - 생성 과정
 	1. 네트웍을 통해 'Binary(음악, 그래픽, 영화 등등, 8bit)' 파일을 보낼 필요가 생김
 	2. 7bit의 ASCII코드로 이들을 표현하기에 부족
@@ -22,7 +22,7 @@
  	 - 정의
  	 	 - Text파일(ASCII) -> Binary파일로 해독하는 과정
 
-#### **UUEncode(Unix-to-Unix Encode)**
+#### UUEncode(Unix-to-Unix Encode)
  - 초기 인코딩 방식의 대표적 표준
  - 진행
  	 - 어떤 Binary Data 중 3개의 byte를 가져왔을 때 다음과 같다면
@@ -34,7 +34,7 @@
 	 - 각각에 십진수 32(이진수 1000000)를 더함(조절문자가 아닌 보통의 문자로 바꾸기 위함)
 		`01100111  01000011  01001111  01110000`
 
-#### **MIME(Multipurpose Internet Mail Extensions)**
+#### MIME(Multipurpose Internet Mail Extensions)
  - 정의
  	 - 메시지 Content-Type을 정의하기 위한 인터넷 표준
  	 - UUEncode가 성장된 방식
