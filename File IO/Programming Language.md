@@ -1,15 +1,15 @@
 # 프로그래밍 언어
 
-## ** 저급언어 **
+## 저급언어
  - 어렵고 사용하기에 불편하지만 컴퓨터가 처리하기엔 용이한 컴퓨터 중심의 언어
 
-### ** 기계어 **
+### 기계어
  - 정의
  	 - 0,1로 이루어진 언어
  - 특징
  	 - CPU의 종류에 따라 다르기 때문에 통일된 규격이 없음
 
-### ** 어셈블리어(Assembly Language) **
+### 어셈블리어(Assembly Language)
  - 정의
  	 - 하드웨어와 소프트웨어의 가장 밑바닥에 있는 언어, 기계어와 명령어가 1:1로 대응되어 구성된다.
  - 특징
@@ -18,10 +18,10 @@
  	 - 매우 세밀하게 프로그램 해야함
  	 - 하드웨어의 특성을 받아옴
 
-## ** 고급 언어 **
+## 고급 언어
  - 기종에 관계 없이 사용가능한 사용자 중심의 언어
 
-### ** 컴파일 언어(Compiled Language) **
+### 컴파일 언어(Compiled Language)
  - 정의
  	 - 기계어로 ‘컴파일’되는 언어
  - 특징
@@ -31,7 +31,7 @@
  - 종류
 	 - C, C++, C#, JAVA, Pascal, Fortran …
 
-### ** pCode(Bytecode) **
+### pCode(Bytecode)
  - 정의
  	 - 컴퓨터가 ‘interpret’ (Compiled)해 놓은 구문은 축약된 형태로 변형되는데, 기계어도 아니고 사용자의 고급언어도 아닌 중간자적 형태(Java의 .class)
  - 생성 과정
@@ -44,7 +44,7 @@
  - 종류
  	 - Hello. java  –(compiler)–  Hello.class  –(JVM)–  Hello동작
 
-## ** 인터프리터 언어(Interpreted Language) **
+## 인터프리터 언어(Interpreted Language)
  - 정의
  	 - 컴파일 언어처럼 몽땅 기계어로 미리 변환되는 것이 아니고 실행 중에 ‘interpreted’하는 언어
  - 특징
@@ -54,7 +54,7 @@
  	 - JavaScript(=JScript, ECMAScript), ActionScript, VBScript, SQL, HTML… (Script, Mark-UP언어)
 
 
-## ** 스크립트 언어(Script Language) **
+## 스크립트 언어(Script Language)
  - 정의
  	 - 인터프리터 언어 중 “프로그래밍 언어”라 붙이기에는 다소 단순한 기능만을 수행해 주는 것들
  - 종류
