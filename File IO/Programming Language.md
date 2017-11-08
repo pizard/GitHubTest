@@ -1,15 +1,18 @@
 # 프로그래밍 언어
 <img src="../image/File IO\D.D\Programming Language.png"></img> 	 
-## 저급언어
- - 어렵고 사용하기에 불편하지만 컴퓨터가 처리하기엔 용이한 컴퓨터 중심의 언어
+## 저급언어 vs 고급언어
+ - 저급언어
+	 - 어렵고 사용하기에 불편하지만 컴퓨터가 처리하기엔 용이한 컴퓨터 중심의 언어
+ - 고급 언어
+	 - 기종에 관계 없이 사용 가능한 사용자 중심의 언어
 
-### 기계어(Machine Code)
+## 기계어(Machine Code)
  - 정의
  	 - 0,1로 이루어진 언어
  - 특징
  	 - CPU의 종류에 따라 다르기 때문에 통일된 규격이 없음
 
-### 어셈블리어(Assembly Language)
+## 어셈블리어(Assembly Language)
  - 정의
  	 - 하드웨어와 소프트웨어의 가장 밑바닥에 있는 언어, 기계어와 명령어가 1:1로 대응되어 구성된다.
  - 특징
@@ -18,10 +21,7 @@
  	 - 매우 세밀하게 프로그램 해야함
  	 - 하드웨어의 특성을 받아옴
 
-## 고급 언어
- - 기종에 관계 없이 사용 가능한 사용자 중심의 언어
-
-### 컴파일 언어(Compiled Language)
+## 컴파일 언어(Compiled Language)
  - 정의
  	 - 기계어로 ‘컴파일’되는 언어
  - 특징
@@ -31,7 +31,7 @@
  - 종류
 	 - C, C++, C#, JAVA, Pascal, Fortran …
 
-### pCode(Bytecode)
+## pCode(Bytecode)
  - 정의
  	 - 컴퓨터가 ‘interpret’ (Compiled)해 놓은 구문은 축약된 형태로 변형되는데, 기계어도 아니고 사용자의 고급언어도 아닌 중간자적 형태(Java의 .class)
  - 생성 과정
@@ -83,6 +83,7 @@
  	 - 스크립트 언어
  - [홍씨IT](http://hongci.tistory.com/18 "홍씨IT")
  	 - 어셈블리 언어
+ 	 - 프로그래밍 언어 이미지(이거 이렇게 긁어와도 되는건가..? ㅇ.ㅇ 문제가 된다면 말해주세요...)
  - [Gun's Knowledge Base](http://jokergt.tistory.com/81 "Gun's Knowledge Base")
  	 - 스크립트 언어
  - [ubuntu forums](https://ubuntuforums.org/showthread.php?t=2073273 "ubuntu forums")
