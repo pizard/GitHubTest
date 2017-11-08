@@ -92,6 +92,8 @@
  	 - difference between scripting language and interpreted language
  - 아따 잘 모르겠구마......ㅜㅜㅜㅜㅜㅜ
 
+ - 나중에 추가할 사이트
+ 	 - [linuxism](http://linuxism.tistory.com/1941 "linuxism")
+ 	 - [HAMA 블로그](http://hamait.tistory.com/353 "HAMA 블로그")
 
  - 다른 참고한 곳 들도 많은데 예전에 적어놓은거라 어디서 썻느지 모르겠네요ㅜㅜ 아직 진행중...ㅜ
-
