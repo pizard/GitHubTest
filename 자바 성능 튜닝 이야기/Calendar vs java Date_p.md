@@ -31,7 +31,6 @@
  	 	 - 가독성을 위해 아래와 같은 기법을 사용하는 사람도 있지만 완벽하진 않음
 	 	 	` calendar.set(1582, 10 - 1 , 4); `
 
-
  - Calendar -> Date 변환
  	```
  	 Calendar cal = Calendar.getInstance();
@@ -47,6 +46,19 @@
 	 cal.setTime(d);
 	```
 
+
+## SimpleDateFormat
+ - 용도
+ 	 - Date의 날짜 포맷 형식 지정하는 클래스
+ - 형태
+ 	 - `SimpleDateformat format = new SimpleDateFormat("yyyyMMdd, Locale.KOREAN")`
+ 	 - yyyyMMdd: 출력 형태
+ 	 - Locale: 사용언어(월,화,5월,MON,TUE,May... / KOREAN, ENGLISH... )
+ 	 - Locale은 없어도 되지만 전자정부규약에서는 적는 것을 권장
+ 
 ### 참고
- - [아라비안나이트](http://arabiannight.tistory.com/entry/%EC%9E%90%EB%B0%94Java-Calendar-%EC%82%AC%EC%9A%A9%EB%B2%95-%EA%B8%B0%EB%B3%B8%EC%98%88%EC%A0%9C-%ED%8F%AC%ED%95%A8 "아라비안나이트")
+ - [아라비안나이트](http://arabiannight.tistory.com/entry/자바Java-Calendar-사용법-기본예제-포함 "아라비안나이트")
  - [NaverD2](http://d2.naver.com/helloworld/645609 "NaverD2")
+
+ - [상상하라! 이루어진다!](http://gmasitt.tistory.com/entry/JAVA-현재-날짜시간-구하기-월요일을-한글영문으로-간단하게-구하기 "상상하라! 이루어진다!")
+ 	 - SimpleDateFormat
