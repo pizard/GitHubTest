@@ -1,2 +1,2 @@
-# GitHubTest
-SublimeText GitHub연동 Repository입니다.
+# StudyTIL
+StudyTIL Repository입니다.
