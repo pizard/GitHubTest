@@ -1,5 +1,4 @@
 # URLConnection Sample
-
 ## 1.BufferedOutputStream
 ```java
 	OutputStream outStream = null;
