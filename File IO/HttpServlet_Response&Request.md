@@ -53,3 +53,5 @@
 			} else {
 		    	response.sendRedirect("http://www.redirect.com");
 			} `
+
+### 참고
