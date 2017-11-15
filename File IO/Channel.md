@@ -25,6 +25,7 @@
 
 ### 더 공부할 것
  - Buffer가 도대체 뭔지...ㅜ
+ - 소켓 복습 해야할 것 같은뎅...
 
 ### 참고
  - [DEVSTORY](http://eppffy.tistory.com/10 "DEVSTORY")
