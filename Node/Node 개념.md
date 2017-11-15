@@ -1,4 +1,4 @@
-# ** Node.js **
+# Node.js
  - Google Chrome Javascript Engine(V8 Engine)에 기반하여 만들어진 Server Side Platform
  - 2009년 Ryan Dahl에 의해 개발
  - 특징
@@ -17,7 +17,6 @@
  	 - Single Page 어플리케이션
  - Node.js를 쓰지 말아야 할 곳
  	 - CPU사용률이 높은 어플리케이션
-
 
 ### 참고
  - [VELOPERT.LOG](https://velopert.com/133 "VELOPERT.LOG")
