@@ -1,6 +1,6 @@
 # Channel
 ## [NIO] JAVA NIO 의 ByteBuffer와 Channel 클래스 사용하기!
-
+ 
 ### JAVA NIO - channel은 왜 그리고 언제 쓰나?
  - 소켓 채널 통신도 디폴트는 블록모드 이지만 'java.nio'패키지에서 제공하는 non-blocking 모드로 구현이 가능함
 
