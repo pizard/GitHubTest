@@ -6,6 +6,14 @@
  	 - J2SE 1.4에서 표준 I/O를 보완하기 위해서 소개 되었음
  	 - 자바 7에서 NIO2라 불리는 새로운 파일시스템 API 제공
 
+### NIO 패키지
+ - `java.nio`
+ 	 - 바이트 버퍼와 관련된 클래스 제공
+ - `java.nio.channels`
+ 	 - 입출력 작업을 할 수 있는 클래스 제공(하드웨어 디바이스, 파일, 네트워크 소켓)
+ - `java.nio.charset`
+ 	 - 바이트와 문자의 변환을 지원하는 인코딩과 디코딩 클래스 제공
+
 ### IO vs NIO
  - 자바 I/O 파일 읽기
  	 1. 커널에 명령 전달
@@ -64,4 +72,7 @@
  - [HomoEfficio](http://homoefficio.github.io/2016/08/06/Java-NIO는-생각만큼-non-blocking-하지-않다 "HomoEfficio")
  	 - Java NIO는 생각만큼 non-blocking 하지 않다.
  	 - DMA [eincs](http://eincs.com/2009/08/java-nio-bytebuffer-channel-file/ "eincs")
- - [회색꿈](http://graydream.tistory.com/73 "회색꿈")
+ - [회색꿈](http://eppffy.tistory.com/12 "회색꿈")
+
+ - [DEVSTORY](http://graydream.tistory.com/73 "DEVSTORY")
+ 	 - NIO 패키지
