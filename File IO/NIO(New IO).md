@@ -58,6 +58,7 @@
  - Channel..? Stream..?
  - NIO2가 쓸만한건가? 진짜 많이 쓰나? JAVA에서도 쓰이나?ㅜㅜㅜ 왜 이렇게 정보가 없을까...
  - DMA가 뭐지..?
+ - Selector랑 Channel을 이용해서 한다는데 Selector가 뭐지..?ㅜㅜ
 
 ### 참고
  - [HomoEfficio](http://homoefficio.github.io/2016/08/06/Java-NIO는-생각만큼-non-blocking-하지-않다 "HomoEfficio")
