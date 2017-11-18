@@ -18,7 +18,6 @@ Staging Area를 왜 사용하는가?
 
 
 참고 1: http://manducku.tistory.com/49
-
 참고 2: https://blog.npcode.com/2012/10/23/git%EC%9D%98-staging-area%EB%8A%94-%EC%96%B4%EB%96%A4-%EC%A0%90%EC%9D%B4-%EC%9C%A0%EC%9A%A9%ED%95%9C%EA%B0%80/
 
 
