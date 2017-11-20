@@ -112,10 +112,36 @@
 	 	 - 파일의 크기 반환
 	 4. public abstract FileChannel truncate(long size) throws IOException
 	 	 - 채널의 크기(?) 설정, 
-	 5. transferFrom (ReadableByteChannel src, long position, long count)
+	 5. transferFrom(ReadableByteChannel src, long position, long count)
 	 	 - FileChannels에 대해 ReadableByteChannel인스턴스인 채널(src)로부터 읽어들인다.
-	 6. transferTo (long position, long count, WritableByteChannel target)
+	 	 - read()메서드보다 빠름
+	 6. transferTo(long position, long count, WritableByteChannel target)
 	 	 - FileChannels에 대해 WritableByteChannel 인스턴스(target)로 데이터를 출력한다.
+	 	 - write()메서드보다 빠름
+	 7. public final FileLock lock()
+	 	 - 파일에 Lock을 걸어서 다른 프로세스나 스레드의 접근을 막는 메서드
+	 	 - 호출시 FileLock클래스의 인스턴스 리턴
+	 8. public abstract FileLock lock (long position, long size, boolean shared)
+	 	 - (position ~ size)까지 일부 영역을 Lock하는 기능
+	 	 - shared, true: 공유 FileLock(2개 ↥), false: 비공유 FileLock(독점)
+	 9. public final FileLock tryLock()
+	 	 - 다른 Thread에서 Lock을 걸고 있는 경우 null을 리턴하여 lock()메서드가 블로킹되는 것을 방지
+	 10. ※ 파일 Lock 풀기
+		 - release() 사용.-> 이 FileLock이 release()된것인지 아닌지는 isValid()로 알 수 있다.
+		 - FileLock에 연결된 하부 채널이 close()된 경우
+	 	 - 자바가상머신이 종료된경우
+	 11. public abstract MappedByteBuffer map(FileChannel.MapMode mode, long position, long size)
+	 	 - 파일의 영역을 position의 위치에 size만큼 직접 메모리에 매핑
+	 	   ➜ 자주 읽거나 쓰는 파일에 유리
+	 	 - MappedByteBuffer의 리턴형을 사용하는데 Heap이 아닌 Java가 관리하는 일반 메모리 영역을 따로 잡음
+	 	   ➜ 준비시간이 많이 걸림
+ 	       ➜ 사이즈가 큰 파일에 유리
+ 	     - mode의 경우 MappedByteBuffer를 파일로 사용할 때 어떤 방식으로 사용할 지 설정, 상수로 이미 선언되어 있음
+ 	     	 - READ_ONLY: 읽기전용
+ 	     	 - READ_WRITE: 읽기/쓰기
+ 	     	 - PRIVATE: copy-on-write, 읽기/쓰기가 가능하지만 쓰기의 경우 복사본을 만들어 변화내용 적용
+
+
 
 # ///////////////////////////////////// 진행 중 /////////////////////////////////////
 
@@ -152,17 +178,30 @@
  
  - [Minsub's Blog](http://gyrfalcon.tistory.com/entry/Java-NIO-Channel "[Java] NIO Channel [펌]")
 	 - 채널(channel)
-	 - `java.nio.channels` 인터페이스
+	 - java.nio.channels 인터페이스
+	 - java.nio.channels 클래스
+	 - 갓갓가ㅏ라갓 어디서 퍼오셨는지 사랑합니다-
+
+ - [One Day One Line / ByteBuffer vs Channel ](http://killsia.tistory.com/entry/NIO-JAVA-NIO의-ByteBuffer와-Channel로-File-Handling에서-더-좋은-Perfermance-내기?category=426417 "ByteBuffer vs Channel")
+
+ - [One Day One Line / IO vs NIO Performance](http://sooin01.tistory.com/entry/IO-vs-NIO-performance-compare-성능-비교 "IO vs NIO Performance")
+
+
 
 ### 공부할 것
- - 채널(channel) > `java.nio.channels` 인터페이스 > ScatteringByteChannel & GatheringByteChannel
+ - 채널(channel) > java.nio.channels 인터페이스 > ScatteringByteChannel & GatheringByteChannel
 	 - IO에서는 파일을 읽는 경우 read의 파일을 Stream에 넣고, 파일에 쓰는 경우 Stream을 파일에 넣는데 Channel은 왜 Parameter가 둘다 ByteBuffer냐...? ㅇ.ㅇ...
- - 채널(channel) > `java.nio.channels` 클래스 > AbstractInterruptibleChannel
+ - 채널(channel) > java.nio.channels 클래스 > AbstractInterruptibleChannel
  	 - Abstract class가 정확하게 뭐지? 다른 데서도 되게 많이나오던데 추상 클래스...
- - 채널(channel) > `java.nio.channels` 클래스 > FileChannels
+ - 채널(channel) > java.nio.channels 클래스 > FileChannels
  	 - 이거 왜 Stream을 통해서 구현되는거지? Channel이랑 Stream이랑 대립되는 방식이 아니었나? I/O에서 발전된 형태가 같이 넣은건가? 그럼 Stream이랑 Buffer랑 대립되는 건가? 채널은 통로... Stream은 방식..? ByteBuffer는 결과물? ㅎㅏ... 복작복작하네ㅡㅡ
  	 ➜ https://www.quora.com/What-is-the-difference-between-streams-and-buffers-in-JavaScript-Node-js
  	 ➜ Buffer와 Stream이 대립되는 방식, 버퍼는 어딘가로 옮길때 램에 일시적으로 할당, Stream은 버퍼링 방식이 아닌 하나의 덩어리 단위로 다룸
  	 - 버퍼링 방식 아는데... 기억이 잘 안나... 복습해야겠당ㅜㅜ 무튼 일단 다시 위로...
- - 채널(channel) > `java.nio.channels` 클래스 > FileChannels > public abstract FileChannel truncate(long size) throws IOException
+ - 채널(channel) > java.nio.channels 클래스 > FileChannels > public abstract FileChannel truncate(long size) throws IOException
  	 - 이거 크기라는게 Buffer가 지날 수 있는 Channel(통로)의 크기인건가? 출력 할 때 파일의 크기의 limit을 정하는건가?
+ - 채널(channel) > java.nio.channels 클래스 > FileChannels > transferTo / transferFrom
+ 	 - 이거 왜 read/write보다 빠른거야? 차이는 뭐고 성능 표보니까 GatheringByteChannel/ScatteringByteChannel이 제일 빠르던데 성능표에서는 다수의 파일이었던건가..?
+ - 채널(channel) > java.nio.channels 클래스 > FileChannels > FileLock 부분
+ 	 - FileLock로 파일 접근을 막으면 막는거지 boolean shared을 왜 넣은걸까..? true면 안막고 false면 막고? 이건 채널에 걸어주는건가? 뭔가 알거같으면서 모를걸 같기도 하고ㅜㅜ tryLock은 또 뭔소리여..
+ 	 ➜ 'FileLock에 연결된 하부채널'이라는 문장을 보니까 FileLock은 채널에 걸어주는거고 공유 FileLock의 경우 하부 채널만 사용할 수 있도록 하는거 같지..?
