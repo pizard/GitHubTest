@@ -1,0 +1,300 @@
+ -------------------------------------------------------------- Android Studio --------------------------------------------------------------------
+ 
+ this: 현재 Activity에서 사용되고있는 Context를 지칭함
+
+Listener & Callback & Function, Observer
+ Listener
+  - 특정 이벤트를 처리하는 Interface
+  - Interface 구현을 위해 별도의 클래스를 하나 더 선언해야 함
+  - Listener로 전달하 지역변수는 final로 선언해야 함
+
+ CallBack Function
+  - 이벤트의 발생을 감지하기 위한 처리와 그 이벤트 발생시 실행할 각각의 처리를 나누어 코딩 가능
+ 
+
+ Listener vs CallBack Function
+  - 대상 뷰를 가리키는 V(View)를 가지는가 아닌지의 차이
+    CallBack의 경우 뷰 클래스 소속이기때문에 이벤트 발생 대상이 정해져있지만
+    Listener의 경우 여러 위젯에 의해 공유될 수 있으므로 대상 뷰가 누구인지 전달받아야 한다.
+
+ Listener vs Observer
+  - Listener는 이벤트가 발생했을때 사용하는 개념이고
+    Observer는 변경을 감지하기 위해 사용하는 개념
+
+ android:id="@+id/..."
+  - @: XML에게 ID Resource라는 것을 알려주는 기능
+  - +: R.java Class에 새로운 Resource 이름을 추가하는 기능
+
+ onLongClickListener의 경우  return type에 따라 true인 경우 이벤트를 소비헀다 판단하고 그 이벤트를 폐기함, false인 경우 CallBack Method가 계속 호출되어 Button clicked으로 변경된 이벤트가 발생한다.
+
+
+ Android Studio 호출순서
+  - OnCreate() -> OnStart() + OnResume() (인터넷 연결)
+  - OpenPause() -> OnStop -> OnDestroy
+
+
+ saveInstanceState
+  - 화면이 세로모드에서 가로모드로 전환시 onCreate함수가 다시 호출되는데 만약 전역변수를 설정하고 항상 사용해야 하는경우라도 화면이 세로모드에서
+    가로모드로 변경될 경우 설정한 값들이 초기화 된다. 변경된 값들을 유지하기 위해 saveInstanceState를 사용함
+
+
+ TabLayout
+  - 탭 구현 Component
+  - Fixed tabs
+  - Scrollable tabs
+
+ 안드로이드 - Activity, Service, Content Provider, BroadCastRECEIVER
+
+ public intent(Context packageContext,class<?>cls) 	--> packageContext에서 cls를 실행함
+ public void startActivity(Intent intent)		--> 실행
+
+ Toast vs SnackBar
+  - Toast: TextView 팝업..?
+  - SnackBar:아래서 위로 올라오는 팝업(Click Button가능)
+
+ View vs ViewGroup
+  - View: 버튼이나 텍스트 필드와 같은 UI Widget
+  - ViewGroup: 여러개의 View 또는 ViewGroup를 포함할 수 있는 컨테이너의 개념(View + ViewGroup)
+
+ Activity
+  - 인터페이스 자체를 구성하는 기본 단위
+
+ Intent
+  - 다른 액티비티를 호출할 때 사용하는 생성자(화면전환)
+  - Intent intent = new Intent(getApplicationContext(), SecondActivity.class)
+    startActivity(intent)
+	- getApplicationContext(): 현재 Activity 정보가 담겨있는 것
+	- SecondActivity.class: 전환할 Activity
+	- startActivity(intent): 전환할 Activity로 부터 받는 응답을 처리할 필요가 없는 경우 사용
+
+  - Intent intent = new Intent(getApplicationContext(), SecondActivity.class)
+    startActivityForResult(intent, REQUEST_CODE);
+	- startActivityForResult(): 새로 띄운 Activity로 부터 받는 응답을 처리할 경우 사용
+ 
+
+ ViewPager
+  - 수평으로 View를 좌/우 로 스크롤 할때 사용하는 클래스
+
+  - class A extends B:    A는 B의 클래스를 상속받을 것이다.
+  - class A implements C: A는 C라는 인터페이스를 구현할 것이다.
+
+ Stream: 일련의 연속된 데이터 흐름
+ FileInputStream/FileOutputStream: 파일 입출력에 사용되는 입출력 클래스
+ BufferedReader/BufferedWriter: 버퍼를 이요해 Reader와 Writer의 입출력 효율을 개선한 클래스
+ DataInputStream/DataOutputStream: 
+ 
+ ----------------------------------------------------------- Push Notification ------------------------------------------------------------------
+
+
+ NotificationCompat.Builder			<-- 4.1이하 버젼과의 호환성 고려
+ Notification.Builder				<-- 4.1부터만 사용 가능
+  - setSmallIcon: 아이콘
+  - setTicker: 알림이 뜰때 잠깐 표시되는 Text
+  - setWhen: 알림이 표시되는 시간
+  - setNumber: 미확인 알림의 개수
+  - setContentTitle: 상단바 알림 제목
+  - setContentText: 상단바 알림 내용
+  - setDefaults: 기본 설정
+  - setContentIntent: 실행할 작업이 담긴 PendingIntent
+  - setAutoCancel: 터치하면 자동으로 지워지도록 설정
+  - setPriority: 우선순위
+  - setOngoing: 진행중 알림
+  - addAction: 아림에서 바로 어떤 활동을 할지 선택하는 것
+
+
+ bigPicture 알림 방식
+  큰사진을 표시할 때 사용 뼈대는 Builder과 일치
+  Notification.BigPictureStyle
+    - setBigContentTitle: 알림을 늘린 후 제목
+    - setSummaryText: 알림을 늘린 후 내용
+    - setbigPicture: 표시할 사진을 입력
+ 
+ bigTextStyle 알림 방식
+  Notification.BigTextStyle
+    - setSummaryText:알림을 늘린 후 내용
+    - setBigContentTitle:알림을 늘린 후 제목
+    - bigText: 알림을 늘린 후 내용
+
+
+ ---------------------------------------------------------------- Intent ------------------------------------------------------------------------
+
+ Intent란
+  - 하나의 액티비티가 다른 액티비티로 진입할 수 있는 메시징 시스템
+
+ Explicit Intent: 전달 대상이 명확한 Intent
+ Implicit Intent: 전달 대상이 불명확한 Intent
+
+ putExtra("key", values): 데이터 전달 함수
+ ex. data.putExtra("key", "원숭이 엉덩이는 빨개");
+ 
+ startActivityResult()반환값이 있는 경우 사용 함수
+
+ onActivityResult(int requestCode, int resultCode, Intent data) 반환 함수
+
+
+ Bundle: Extra 수신 객체
+ ex. Bundle extras = getIntent().getExtras();
+     String aa = extras.getString("key");
+
+ finish(): 뒤로가기 or 장시간 진입 X인 경우
+
+ intent.addFlag
+  - 플래그의 특정 옵션값을 startActivity가 수행될때 같이 넘겨줌
+	- FLAG_ACTIVITY_SINGLE_TOP
+	   A,B activity가 존재할때 A activity는 B를 B activity는 자기자신을 호출한다고 하자
+	  이때 B의 경우 또 하나의 B를 생성하는 대신 기존의 B activity를 재활용함
+	    -> onPause() -> onNewIntent() -> onResume() 순서로 동작
+	  ex. [A] -> [B] -> [C] -> [D] -> [D]  (적용 O)  결과 : [A] -> [B] -> [C] -> [D]
+
+	- FLAG_ACTIVITY_NO_HISTORY
+	   A,B activity가 존재할때 A activity는 B를 B activity는 A를 호출한 후에 (A -> B -> A) 
+	  사용자가 Back키를 누르는 경우를 가정해 보자
+	  일반적인 경우 이전에 실행하였던 B가 나타나지만 NO_HISTORY의 경우 바로전 단계인 B가 삭제되고 A activity가 나타남
+	   
+	- FLAG_ACTIVITY_CLEAR_TOP
+	   기존에 Activity Stack에 쌓여있던 Activity 중 RootActivity와  작동중인 Activity만 남기고 onDestroy()시켜버리는 Flag
+	   -> onCreate부터 시작
+	  ex. [A] -> [B] -> [C] -> [D] -> [B]  (적용 O)  결과 : [A] -> [B]
+
+	- FLAG_ACTIVITY_REORDER_TO_FRONT
+	   무조건 동일한 Activity를 최상위로 올려버림
+	   onResume()으로 재시작
+	  ex. [A] -> [B] -> [C] -> [D] -> [B]  (적용 O)  결과 : [A] -> [C] -> [D] -> [B]
+	   
+	- 
+	   
+	- 
+	  
+ ---------------------------------------------------------------- Button ------------------------------------------------------------------------
+
+ OnClickListener
+
+  - 1) 모든 Button에 각각 지정해 줘야함
+    Button bt = (Button)findViewById(R.id.button1)
+    bt.setOnClickListener(new OnClickListener(){
+	@Override
+	public void onClick(View arg[]){
+	    //Code
+	}
+    });
+
+  - OnClickListener Interface를 이용하는 방법
+    activity에 View.OnClickListener 인터페이스를 implements해줌
+  - Button bt = (Button) view.findViewById(R.id.button_ID)
+    bt.setOnClickListener(this)를 통해 버튼을 등록해줘야 Click으로 사용 할 수 있음!!
+ 
+ ---------------------------------------------------------------- Fragment ------------------------------------------------------------------------
+
+ Fragment는 View가 아니기 때문에 Context를 그냥 얻을 수 없고 getActivity() 또는 getActivity().getApplicationContext()를 통해 얻을 수 있음
+
+ OnAttach()
+  - OnAttach에서 Activity 값을 얻을 수 있음
+ 
+ setRetainInstance(true)
+  - 기본적으로 Activity가 destroy되고 recraete될 떄 Fragment도 같이 destroy되고 recreate되는데 이때 이 Method를 사용하면 fragment가 destroy,recreate되지 않게 할 수 있음
+
+ OnCreateView()
+  - 화면이 바뀌면 화면에 그려진 GUI와 관련된 부분들은 다시 그려져야하는데 화면이 바뀌게 되면 이 화면을 다시 그려야 하기 때문에 inflate를 해줘야 한다.
+    그러므로 화면이 바뀌어서 다시 돌아오게 되면 onCreateView()부터 시작하게 됨
+  - 화면은 inflate하는 부분, inflate를 set하는 부분 등 inflate과 관계있는 code를 넣어줘야함
+
+ onActivityCreated()
+  - Activity에서 Fragment를 모두 생성하고 난 후에 생성되는 Method, 이 Method가 호출될 때는 Activity의 모든 View가 만들어 진 후이기에 View를 변경하는 등의 작업을 할 수 있음.
+
+ android:name
+  - Fragment 와 연관된 클래스 참조
+
+ tool:layout
+  - Fragment의 레이아웃을 포함하는 XML리소스 파일 참조
+
+
+ ------------------------------------------------------------------ 단축키 ------------------------------------------------------------------------
+
+마우스 중앙 커서로 라인의 특정부분들만 삭제 가능!!!!!!! Wow Wonderful
+
+Ctrl + Space : 기본 코드 완성
+Ctrl + Shift + Space : 스마트 코드 완성(예상되는 타입의 메소드또는 변수명 )
+Alt + Insert : Generate code( Getters, Setters, Constructors, hashCode/equals, toString )
+Ctrl + / : 한줄주석
+Ctrl + Shift + / : 블럭주석
+Ctrl + W : 연속적인 코드블럭 선택
+Alt + Enter : 빠른수정.
+Ctrl + Shift + V : 이전에 클립보드에 복사한 히스토리 열기.
+Ctrl + D : 라인복제 또는 선택블록 복제
+Ctrl + Y : 라인삭제
+Ctrl + Shift + J : 라인합치기(Smart line join)
+Ctrl + Enter : 라인분리(Smart line split)
+Ctrl + Shift + U : 대소문자 변환
+Ctrl + Shift + ] / [ : 코드블럭 처음또는 끝까지 선택
+ 
+ 
+ 
+Search/Replace
+ 
+Double Shift : 모든곳에서 찾기.
+Ctrl + F : 찾기
+F3 : 다음찾기
+Shift + F3 : 이전찾기
+Ctrl + R : 바꾸기
+
+ 
+Compile and Run
+ 
+Shift + F10 : Run
+ 
+ 
+Debugging
+
+F8 : Step over
+F7 : Step into
+Shift + F7 : Smart step into
+Shift + F8 : Step out
+Alt + F9 : Run to cursor
+Alt + F8 : Evaluate expression
+F9 : Resume program
+Ctrl + F8 : Toggle breakpoint
+Ctrl + Shift + F8 : View breakpoints
+ 
+ 
+ 
+Navigation
+
+Ctrl + N : 클래스 열기
+Ctrl + Shift + N : 파일열기
+Ctrl + Alt + Shift + N : Go to symbol
+Alt + Right/Left : 문서탭이동
+F12 : 이전에 사용한 도구창 열기
+Shift + Esc : 마지막에 사용한 도구창 닫기
+Ctrl + G : 줄번호로 이동.
+Ctrl + E : 이전에 열었던파일 목록창 열기
+Ctrl + B or Ctrl + Click : Go to declaration
+Ctrl + Alt + B : Go to implementation(s)
+Ctrl + Shift + I : Open quick definition lookup
+Ctrl + Shift + B : Go to type declaration
+Ctrl + U : super-method/super-class 이동.
+Alt + Up/Down : 이전/다음 함수 이동
+Ctrl + ] / [ :  코드블럭 처음/끝 이동
+Ctrl + F12 : 파일 구조보기
+F2 / Shift + F2 : 다음/이전 하이라이트된 에러로 이동.
+F4 : 해당 소스로 이동
+ 
+ 
+ 
+Refactoring
+ 
+F5 : 복사
+F6 : 이동
+Alt + Delete : 안전하게 삭제(지우기전에 사용된곳 확인 가능)
+Shift + F6 : 변수이름, 클래스 이름 등 동기화가 필요한 모든 이름 바꾸기에 사용됨
+
+
+
+ ---------------------------------------------------------------- Android Studio ----------------------------------------------------------------------
+
+ - xml파일 첫글자 대문자 안됨
+
+setContentView(R.layout.activity_next);
+ - 화면 띄움, 해당 XML파일을 화면에 띄웁니다
+
+Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+ - 화면이동, 해당 JavaFile로 이동합니다.

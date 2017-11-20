@@ -1,0 +1,65 @@
+ - 2017.04.04, Term Project: D-Museum 퍼블구성 Due 2017.04.07
+
+    - 웹 접근성을 지키기 위해서는 제목과 같은것을 만들고 숨겨 줘야함
+    - 강조
+      - em: 일반적으로 문맥상의 중요한 부분을 강조할 때 사용. 나는 '어제' '너'랑 '치킨'을 먹었다.
+      - strong: 일반적으로 예외사항같이 경고를 해줄때 사용
+      - b: bold, 강조
+
+    - layout배치
+      - margin: 콘텐츠와 콘텐츠 사이 거리(자식), 일반적으로 content로 인식되지 않음
+      - padding: 부모에서 콘텐츠 사이 거리(부모), padding의 위치는 href나 background로 인식될떄 유용하다.
+
+    - float clearboth: 일반적으로 height가 없으면 공간이 할당되어있지 않음,  http://naradesign.net/wp/2008/05/27/144/
+      - overflow: hidden
+      - clear:both
+      - class명:after {
+            content: " ";
+            display:block;
+            clear:both;
+        }
+
+    - position
+      - absolute: 기본 static, 붕 떠있음, 부모 기준이고(부모 > position 기준)
+      - fixed: ViewPort 기준, 붕 떠있음
+      - relative: 상대적 기준
+
+    - 가운데 정렬
+      - 이동 후 transform사용
+
+    - box-sizing: border-box
+      - 웹은 기본적으로 content-box의 형태이고 이는 width = content를 의미하는데 이를 border-box로 수정하면
+        width = content + padding의 길이로 수정된다.
+
+    - 줄간격: font_px * 1.5만큼의 여유분을 갖는다.(y, ', f...etc)
+      - img의 경우 기본적으로 inline이기 때문에 문자취급을 받는다. 
+       -> img 2개를 좌우로 연결시 서로 다른 줄인경우 개행문자로 인해 img사이에 간격이 생긴다.
+         -> font_size를 0으로 바꿈으로써 개행문자가 나타나지 않도록 한다.
+       -> img 2개를 위아래로 연결시 문자취급으로 인해 줄간격이 생겨서 img사이에 간격이 생김
+         -> img를 감사는 태그를 통해 display:block을 사용하여 블럭취급을 하도록 수정해줌
+
+
+    - 스프라이트 기법
+      - 기본적으로 on/off의 css를 따로 img를 만들어 적용한다면 첫 시행시 깜빡임이 발생한다. (새로 다운로드 해오기 때문)
+        -> 모든이미지를 한개의 이미지로 만들어 관리하거나 이 이미지만 위아래로 만들어 position을 이용해 다르게 나타나도록 변경
+
+    - 카드리스트적의 배치
+      - explorer 11
+        -> flex 사용
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+      - explorer 9 
+        -> box-sizing을 border로 수정한 후 width:33.33333333%(비율에 따라)를 주고 padding을 걸어 줌으로써 간격을 만듬, 이경우 가장 왼쪽과 가장 오른쪽을
+          맞추기 위해 부모 태그에 padding만큼을 빼 줘야함
+
+    - 자식 선택자: >, 직계 자식만 인식함
+
+    - class의 이름을 2개 사용해서 공통, 개별 이런방식으로 사용할 수 있음
+
+    - div의 경우 block으로 margin & Auto를 사용함
+
+    - 선의경우 이미지보다는 margin-top을 1px을 줘서 나타낼 수 있음
+
+
+

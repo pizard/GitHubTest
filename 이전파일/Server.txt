@@ -1,0 +1,29 @@
+------------------------------------------------------------ KT 클라우드 ------------------------------------------------------------ 
+서버 생성시 방화벽 풀어줘야함
+
+
+
+
+nested exception is java.lang.OutOfMemoryError: Java heap space jboss
+ - Heap Memory 부족 server의 경우 standalone.conf에 들어가서 MaxPermSize등 허용 사이즈 증가
+
+
+
+------------------------------------------------------------ Web.xml ------------------------------------------------------------ 
+
+  - Web.xml
+    - Web Application의 Deployment Descriptor, 환경파일 : 배포 서술자
+    
+  - 내포 내용
+    - ServletContextn의 초기 파라미터
+      - 
+    - Session의 유효시간
+    - Servlet/JSP에 대한 정의
+    - Servlet /JSP 매핑
+    - Mime Type 매핑
+    - Welcome File list
+    - Error Pages 처리
+    - 리스너/필터 설정
+    - 보안
+
+
