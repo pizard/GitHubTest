@@ -19,9 +19,12 @@
   	 - 운영체제가 관리하는 메모리 공간을 이용하는 버퍼
  - 특징
   	 - 운영체제의 메모리를 할당받기 위해 운영체제의 네이티브 C함수를 호출해야 하고 여러 잡다한 처리를 해야 하므로 상대적으로 생성이 느림
-  	 ➜ 자주 생성하기 보다는 한번 생성 후 재사용이 적합함
+  	 ➜ 자주 생성하기 보다는 한번 생성 후 재사용이 하는 것이 적합함
   	 - 운영체제가 허용하는 범위 내에서 대용량 버퍼를 생성할 수 있음
- 	 - 채널(Channel)을 사용해서 버퍼의 데이터를 읽고 저장할 경우에만 운영체제의 native I/O를 수행, 만약 채널을 이용하지 않고 ByteBuffer의 get()/put()메소드를 사용한다면 내부적으로 JNI(Java Native Interface)를 호출하여 native I/O를 수행하기 때문에 JNI호출이라는 오버헤더가 추가됨
+     - ByteBuffer만 가능, 기본형
+     ➜ 운영체제가 이용하는 가장 기본적인 데이터 단위가 바이트이고, 시스템 메모리 또한 순차적인 바이트들의 집합이기 때문
+ 	   - 채널(Channel)을 사용해서 버퍼의 데이터를 읽고 저장할 경우에만 운영체제의 native I/O를 수행
+     - 채널(Channel)을 이용하지 않고 ByteBuffer의 get()/put()메소드를 사용한다면 내부적으로 JNI(Java Native Interface)를 호출하여 native I/O를 수행하기 때문에 JNI호출이라는 오버헤더가 추가됨
   	 ➜ get()/put()을 사용한다면 오히려 NonDirect Buffer의 성능이 더 좋게 나올 수도 있음
   	 ※ JNI(Java Native Interface): 자바 코드에서 C 함수를 호출할 수 있도록 해주는 API
  - Function()
@@ -29,6 +32,9 @@
   	 	 - 운영체제가 관리하는 메모리에 Direct Buffer를 생성
   	 	 - 타입별 Buffer클래스는 없고, ByteBuffer에서만 제공
   		 	 ➜ 이외의 타입의 경우 우선 allocateDirect()메소드로 버퍼를 생성한 후 asCharBuffer(), asShortBuffer()등을 이용하여 해당 타입별 Buffer를 얻음
+     - `isDirect()`
+       - 해당 버퍼가 다이렉트 버퍼인지를 판별
+
 
 ### 3. 메모리 위치(NonDirect Buffer)
  - 정의
@@ -42,9 +48,11 @@
   	 - `allocate()`
   	 	 - JVM 힙 메모리에 NonDirect Buffer를 생성
   	 	 - 타입별 Buffer클래스가 존재(ButeBuffer, CharBuffer, DoubleBuffer...)
-  	 - `wrap()`
-  	 	 - 이미 생성되어 있는 자바 배열을 wraping하여 Buffer 객체를 생성
-  	 	 - 자바 배열은 JVM 힙 메모리에 생성되므로 wrap()은 NonDirect Buffer를 생성합니다.
+       - HeapByteBuffer(capacity, capacity)가 리턴 됨
+  	 - `wrap(byte[] array)`
+  	 	 - 이미 생성되어 있는 배열을 wraping하여 Buffer 객체를 생성
+  	 	 - 배열은 JVM 힙 메모리에 생성되므로 wrap()은 NonDirect Buffer를 생성합니다.
+       - 이때 해당 ByteBuffer는 array배열을 참조하기 때문에 array나 ByteBuffer 한쪽이 변하면 양쪽에 반영 됨
 
 ## byte 해석순서(ByteOrder)
  - Big Endian
@@ -85,7 +93,15 @@
  	 	 - 데이터를 제외한 값들을 초기화 시킴(limit ➜ capacity, position ➜ 0번 index, mark ➜ 삭제)
  	 - `compact()`
  	 	 - 버퍼 Data 위치 변경(position ~ limit DATA ➜ 0번 index, position ➜ 이동 데이터 이후, 나머지는 그대로)
- 	 	 - 딱히 쓸 일 없을듯...
+ 	 	 - ~~딱히 쓸 일 없을듯...~~, 버퍼 안의 데이터를 남김없이 모두 전송하고 싶을때..?, 전송하지 못한 데이터 다음번에 재전송
+  - `duplicate()`
+     - 버퍼에 복사본을 생성할때 사용
+     - 데이터와 기본 속성들을 새로운 버퍼에 생성하는것은 아니고 원본 버퍼와 같은 메모리 공간을 참조하는 버퍼를 생성, positioin, limit, capacity만 다름
+  - `asReadOnlyBuffer()`
+     - duplicate() 전반적으로 일치하지만 읽기만 가능
+  - `slice()`
+     - 일부분만 복사하는 메소드
+
 
 ## 버퍼 변환
  - 채널이 데이터를 읽고 쓰는 버퍼는 모두 ByteBuffer
@@ -102,8 +118,8 @@
  - int의 경우 Bytebuffer로 받은 후 asIntBuffer()를 통해 변환해야 함
  	```
  	int[] writeData = { 10, 20, 30, 50, 70 };
-    IntBuffer writeIntBuffer = IntBuffer.wrap(writeData);
-    ByteBuffer writeByteBuffer = ByteBuffer.allocate(writeIntBuffer.capacity() * 4);
+    IntBuffer writeIntBuffer = IntBuffer.wrap(writeData); 
+   ByteBuffer writeByteBuffer = ByteBuffer.allocate(writeIntBuffer.capacity() * 4);
  
     for (int i = 0; i < writeIntBuffer.capacity(); i++) {
         writeByteBuffer.putInt(writeIntBuffer.get(i));
@@ -120,4 +136,9 @@
 ### 참고
  - [palpit's log-b](http://palpit.tistory.com/641 "palpit's log-b")
    - Buffer의 종류(데이터 타입/메모리 위치)
+   - 메모리의 위치
+   - 버퍼의 위치
    - 갓갓갓갓갓 사랑합니다♡
+ - [Developer](http://devshock.tistory.com/52?category=692562 "Developer")
+   - 공통 메소드 함수... etc
+   - 메모리의 위치
