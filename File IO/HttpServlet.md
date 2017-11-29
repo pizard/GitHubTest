@@ -36,7 +36,7 @@
 	 	 - 즉 클라이언트에 대한 출력 Stream은 OutputStream뿐이고 PrintWriter는 좀 더 쓰기 쉽게 만든 Method
 
  - Header값 설정, 추가
- 	 - setHeader()
+ 	 - setHeader() 
 	 	 - Response의 Header에 값을 덮어(set) 씀
  	 - addHeader()
 	 	 - Response의 Header에 값을 추가(add) 함
