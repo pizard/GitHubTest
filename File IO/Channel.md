@@ -3,7 +3,7 @@
 	 - 서버와 클라이언트간의 통신 수단
 	 - 한 개 이상의 뚜렷한 입출력 작업을 수행할 수 있는 개방된 연결 수단(하드웨어 장비, 파일, 네트워크 소켓 혹은 프로그램 컴포넌트)
  - 특징
- 	 - 기본 데이터형용 버퍼를 클래스로 제공
+ 	 - 기본 데이터형 버퍼를 클래스로 제공
  	   ➜ 데이터 형에 맞는, 전용 메모리 공간을 갖고 있음
 	 - 채널은 비동기적으로 닫히고 중단(interrupt)될 수 있다.
 	   ➜ 한 스레드가 한 채널에서 하나의 입출력 작업으로 블록화하면 다른 스레드가 그 채널을 닫을 수 있다.
@@ -53,16 +53,17 @@
 			 - ClosedChannelException - 보낼 채널이 닫혀있는 경우
 			 - ClosedByInterruptException - write 작업의 진행 중, 다른 thread에 의해 Interrupt되어 이 채널을 닫고 Interrupt 상태가 설정되었을 경우
 			 - IOException - 그 외의 입출력 에러가 발생한 경우
- - **ScatteringByteChannel**
-	 - 여러 개의 버퍼를 읽는 기능
- 	 - ReadableByteChannel의 하위 인터페이스
+ - **ScatteringByteChannel** / **GatheringByteChannel**
+	 - 여러 개의 버퍼를 읽는/쓰는 기능
+	 - 운영체제가 지원하는 native I/O서비스
+	 - 여러 버퍼를 다루기 위한 반복문을 피하고 코드가 간단해짐
+	 - 시스템 콜과 커널 영역에서 프로세스 영역으로의 버퍼 복사를 줄여주거나 완전히 없애 줌
+ 	 - ReadableByteChannel의 하위 인터페이스(Scatter)
  	 1. public long read(ByteBuffer [] dsts) throws IOException 
  	 	 - ByteBuffer의 데이터를 읽어드림
 	 2. public long read(ByteBuffer [] dsts, int offset, int length) throws IOException
  	 	 - ByteBuffer의 데이터를 offset에서 length만큼 읽어드림
- - **GatheringByteChannel**
-	 - 여러 개의 버퍼를 출력하는 기능
- 	 - WritableByteChannel의 하위 인터페이스
+ 	 - WritableByteChannel의 하위 인터페이스(Gather)
  	 1. public long write(ByteBuffer [] dsts) throws IOException 
  	 	 - ByteBuffer의 데이터를 Channel로 출력
 	 2. public long write(ByteBuffer [] dsts, int offset, int length) throws IOException
@@ -181,6 +182,9 @@
 	 - java.nio.channels 인터페이스
 	 - java.nio.channels 클래스
 	 - 갓갓가ㅏ라갓 어디서 퍼오셨는지 사랑합니다-
+
+ - [Developer](http://devshock.tistory.com/55?category=692562 "Developer")
+	 - 채널(Channel)의 일부분
 
  - [One Day One Line / ByteBuffer vs Channel ](http://killsia.tistory.com/entry/NIO-JAVA-NIO의-ByteBuffer와-Channel로-File-Handling에서-더-좋은-Perfermance-내기?category=426417 "ByteBuffer vs Channel")
 
