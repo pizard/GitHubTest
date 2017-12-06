@@ -16,58 +16,60 @@
  	 - Multi Thread 접근에 대해 안전함
  - 인터페이스
  	 - 인터페이스의 이름중에 Byte라는 낱말이 들어가 있는데 이는 채널의 기본 입출력이 ByteBuffer임을 의미한다.
- 	   ➜ CharBuffer, FloatBuffer를 사용하고 싶다면 asXXXBuffer()를 통한 필요
-
-
+ 	 ➜ CharBuffer, FloatBuffer를 사용하고 싶다면 asXXXBuffer()를 통한 필요
 
 ## java.nio.channels 인터페이스
  - **Channel**
- 	 - 모든 채널 클래스류의 최상위 인터페이스
- 	 - 모든 인터페이스들이 상속받으므로 Channel 인터페이스가 가진 메서드를 모두 사용할 수 있음
- 	 1. `public boolean isOpen()`
- 	 	 - 현재 채널의 상태가 오픈인지 아닌지 판단
- 	 2. `public void close() throws IOException()`
- 	 	 - 현재의 채널을 닫는다.
+	 - 모든 채널 클래스류의 최상위 인터페이스
+	 - 모든 인터페이스들이 상속받으므로 Channel 인터페이스가 가진 메서드를 모두 사용할 수 있음
+	 - Method()
+		 - `public boolean isOpen()`
+			 - 현재 채널의 상태가 오픈인지 아닌지 판단
+		 - `public void close() throws IOException()`
+ 	 		 - 현재의 채널을 닫는다.
  - **InterruptibleChannel**
  	 - 블로킹 된 스레드(입출력)를 깨우는 기능
- 	 1. `public void close() throws IOException()`
- 	 	 - Channel 인터페이스의 close()와 다르게 blocking된 입출력에 대해 java.nio.channels.AsynchronousCloseException 예외를 발생시키는 방식으로 닫음
- 	 	 - FileChannel, DatagramChannel, SocketChannel, ServerSocketChannel, Pipe.SinkChannel, Pipe.SourceChannel 클래스에서 구현 가능
+	 - Method()
+ 	 	 - `public void close() throws IOException()`
+ 	 		 - Channel 인터페이스의 close()와 다르게 blocking된 입출력에 대해 java.nio.channels.AsynchronousCloseException 예외를 발생시키는 방식으로 닫음
+ 	 		 - FileChannel, DatagramChannel, SocketChannel, ServerSocketChannel, Pipe.SinkChannel, Pipe.SourceChannel 클래스에서 구현 가능
  - **ReadableByteChannel**
  	 - 데이터를 읽어들이는 기능
- 	 1. `public int read(ByteBuffer dst) throws IOException`
- 	 	 - 채널의 데이터를 읽음(position ~ )
- 	 	 - Error Message
- 	 	 	 - NonReadableChannelException - 받을 채널을 읽지 못하는 경우 
-			 - ClosedChannelException - 받을 채널이 닫혀있는 경우
-			 - AsynchronousCloseException - read 작업의 진행 중, 다른 thread에 의해 이 채널이 닫힌 경우 
-			 - ClosedByInterruptException - read 작업의 진행 중, 다른 thread가 우선 설정되어 이 채널을 닫고 그 이후에 진행하는 경우 
-			 - IOException - 그 외의 입출력 에러가 발생한 경우
+ 	 - Method()
+ 	 	 - `public int read(ByteBuffer dst) throws IOException`
+ 	 		 - 채널의 데이터를 읽음(position ~ )
+ 	 		 - Error Message
+ 	 		 	 - NonReadableChannelException - 받을 채널을 읽지 못하는 경우 
+				 - ClosedChannelException - 받을 채널이 닫혀있는 경우
+				 - AsynchronousCloseException - read 작업의 진행 중, 다른 thread에 의해 이 채널이 닫힌 경우 
+				 - ClosedByInterruptException - read 작업의 진행 중, 다른 thread가 우선 설정되어 이 채널을 닫고 그 이후에 진행하는 경우 
+				 - IOException - 그 외의 입출력 에러가 발생한 경우
  - **WritableByteChannel**
  	 - 데이터를 쓰는 기능
- 	 1. public int write(ByteBuffer src) throws IOException
- 	 	 - 채널에 데이터를 출력 (허용 범위: position ~ limit)
- 	 	 - return 값(int)는 출력하는 데이터의 수
- 	 	 - Error Message
- 	 	 	 - NonWritableChannelException - 보낼 채널으로 출력이 불가능한 경우
-			 - ClosedChannelException - 보낼 채널이 닫혀있는 경우
-			 - ClosedByInterruptException - write 작업의 진행 중, 다른 thread에 의해 Interrupt되어 이 채널을 닫고 Interrupt 상태가 설정되었을 경우
-			 - IOException - 그 외의 입출력 에러가 발생한 경우
+ 	 - Method()
+	 	 - `public int write(ByteBuffer src) throws IOException`
+	 	 	 - 채널에 데이터를 출력 (허용 범위: position ~ limit)
+	 	 	 - return 값(int)는 출력하는 데이터의 수
+	 	 	 - Error Message
+	 	 	 	 - NonWritableChannelException - 보낼 채널으로 출력이 불가능한 경우
+				 - ClosedChannelException - 보낼 채널이 닫혀있는 경우
+				 - ClosedByInterruptException - write 작업의 진행 중, 다른 thread에 의해 Interrupt되어 이 채널을 닫고 Interrupt 상태가 설정되었을 경우
+				 - IOException - 그 외의 입출력 에러가 발생한 경우
  - **ScatteringByteChannel** / **GatheringByteChannel**
 	 - 여러 개의 버퍼를 읽는/쓰는 기능
 	 - 운영체제가 지원하는 native I/O서비스
 	 - 여러 버퍼를 다루기 위한 반복문을 피하고 코드가 간단해짐
 	 - 시스템 콜과 커널 영역에서 프로세스 영역으로의 버퍼 복사를 줄여주거나 완전히 없애 줌
- 	 - ReadableByteChannel의 하위 인터페이스(Scatter)
- 	 1. public long read(ByteBuffer [] dsts) throws IOException 
- 	 	 - ByteBuffer의 데이터를 읽어드림
-	 2. public long read(ByteBuffer [] dsts, int offset, int length) throws IOException
- 	 	 - ByteBuffer의 데이터를 offset에서 length만큼 읽어드림
- 	 - WritableByteChannel의 하위 인터페이스(Gather)
- 	 1. public long write(ByteBuffer [] dsts) throws IOException 
- 	 	 - ByteBuffer의 데이터를 Channel로 출력
-	 2. public long write(ByteBuffer [] dsts, int offset, int length) throws IOException
- 	 	 - ByteBuffer의 데이터를 offset에서 length만큼 Channel로 출력
+ 	 - ReadableByteChannel의 하위 인터페이스(Scatter) Method()
+	 	 - `public long read(ByteBuffer [] dsts) throws IOException`
+	 	 	 - ByteBuffer의 데이터를 읽어드림
+		 - `public long read(ByteBuffer [] dsts, int offset, int length) throws IOException`
+	 	 	 - ByteBuffer의 데이터를 offset에서 length만큼 읽어드림
+	 - WritableByteChannel의 하위 인터페이스(Gather) Method()
+	 	 - `public long write(ByteBuffer [] dsts) throws IOException `
+	 	 	 - ByteBuffer의 데이터를 Channel로 출력v 
+		 - `public long write(ByteBuffer [] dsts, int offset, int length) throws IOException`
+	 	 	 - ByteBuffer의 데이터를 offset에서 length만큼 Channel로 출력
  - **ByteChannel**
  	 - 데이터 읽기/쓰기 기능
  	 - ScatteringByteChannel와 GatheringByteChannel를 상속
@@ -82,16 +84,17 @@
  	   ➜ 프로그래머가 제공하는 클래스로 기본 구현들을 수정 가능
  	 - InterruptibleChannel 인터페이스를 구현한 Abstract class
  	 - FileChannel, SelectableChannel 클래스에서 상속
- 	 1. protected void begin()
- 	 	 - 입출력 동작이 일어나기 전 호출
- 	 2. void close()
- 	 	 - 현재의 채널을 닫음
- 	 3. protected void end(boolean completed)
- 	 	 - 입출력 동작이 일어난 후 호출
- 	 4. protected abstract void implCloseChannel() 
- 	 	 - 현재 채널을 닫음
-	 5. boolean isOpen()
-	 	 - 현재 채널이 열려있는지 확인
+ 	 - Method()
+	 	 - protected void begin()
+	 	 	 - 입출력 동작이 일어나기 전 호출
+	 	 - void close()
+	 	 	 - 현재의 채널을 닫음
+	 	 - protected void end(boolean completed)
+	 	 	 - 입출력 동작이 일어난 후 호출
+	 	 - protected abstract void implCloseChannel() 
+	 	 	 - 현재 채널을 닫음
+		 - boolean isOpen()
+		 	 - 현재 채널이 열려있는지 확인
  - **FileChannels**
  	 - 파일 입출력을 위한 채널
  	 - AbstractInterruptibleChannel를 상속받아 비동기 중단 가능
@@ -103,44 +106,52 @@
  	 FileInputStream fis=new FileInputStream("파일명");
 	 FileChannels fc=fis.getChannels();
 	 ```
-	 1. read()/write()
-	 	 - 읽기/쓰기 기능, 전부 ByteBuffer를 인자로 받고 있어서 버퍼 기반의 파일 입출력가능
-	 2. public abstract void force(boolean metaData) throws IOException
-	 	 - FileChannels에서 쓰기는 버퍼의 내용을 바꾸는 것이므로 실제 파일에 적용할 때 사용
-	 	 - 로컬 파일에만 적용
-	 	 - true: 내용 + 최종 수정 시간 / false: 내용
-	 3. public abstract long size() throws IOException
-	 	 - 파일의 크기 반환
-	 4. public abstract FileChannel truncate(long size) throws IOException
-	 	 - 채널의 크기(?) 설정, 
-	 5. transferFrom(ReadableByteChannel src, long position, long count)
-	 	 - FileChannels에 대해 ReadableByteChannel인스턴스인 채널(src)로부터 읽어들인다.
-	 	 - read()메서드보다 빠름
-	 6. transferTo(long position, long count, WritableByteChannel target)
-	 	 - FileChannels에 대해 WritableByteChannel 인스턴스(target)로 데이터를 출력한다.
-	 	 - write()메서드보다 빠름
-	 7. public final FileLock lock()
-	 	 - 파일에 Lock을 걸어서 다른 프로세스나 스레드의 접근을 막는 메서드
-	 	 - 호출시 FileLock클래스의 인스턴스 리턴
-	 8. public abstract FileLock lock (long position, long size, boolean shared)
-	 	 - (position ~ size)까지 일부 영역을 Lock하는 기능
-	 	 - shared, true: 공유 FileLock(2개 ↥), false: 비공유 FileLock(독점)
-	 9. public final FileLock tryLock()
-	 	 - 다른 Thread에서 Lock을 걸고 있는 경우 null을 리턴하여 lock()메서드가 블로킹되는 것을 방지
-	 10. ※ 파일 Lock 풀기
-		 - release() 사용.-> 이 FileLock이 release()된것인지 아닌지는 isValid()로 알 수 있다.
-		 - FileLock에 연결된 하부 채널이 close()된 경우
-	 	 - 자바가상머신이 종료된경우
-	 11. public abstract MappedByteBuffer map(FileChannel.MapMode mode, long position, long size)
-	 	 - 파일의 영역을 position의 위치에 size만큼 직접 메모리에 매핑
-	 	   ➜ 자주 읽거나 쓰는 파일에 유리
-	 	 - MappedByteBuffer의 리턴형을 사용하는데 Heap이 아닌 Java가 관리하는 일반 메모리 영역을 따로 잡음
-	 	   ➜ 준비시간이 많이 걸림
- 	       ➜ 사이즈가 큰 파일에 유리
- 	     - mode의 경우 MappedByteBuffer를 파일로 사용할 때 어떤 방식으로 사용할 지 설정, 상수로 이미 선언되어 있음
- 	     	 - READ_ONLY: 읽기전용
- 	     	 - READ_WRITE: 읽기/쓰기
- 	     	 - PRIVATE: copy-on-write, 읽기/쓰기가 가능하지만 쓰기의 경우 복사본을 만들어 변화내용 적용
+	 - `open()`을 이용해 호출
+	 	 - path: 파일의 경로
+	 	 - OpenOptions: 파일 열기 옵션(읽기전용/쓰기전용/파일이 없다면 새 파일 생성... etc)
+	 ```
+	 FileChannel fileChannel = FileChannel.open(Path path, OpenOption ... options);
+	 ex) FileChannel fileChannel = FileChannel.open(Paths.get("C://test.txt"), StandardOpenOption.READ);
+	 ```
+ 	 - Method()
+		 - `read()/write()`
+		 	 - 읽기/쓰기 기능, 전부 ByteBuffer를 인자로 받고 있어서 버퍼 기반의 파일 입출력가능
+		 - `public abstract void force(boolean metaData) throws IOException`
+		 	 - FileChannels에서 쓰기는 버퍼의 내용을 바꾸는 것이므로 실제 파일에 적용할 때 사용
+		 	 - 로컬 파일에만 적용
+		 	 - true: 내용 + 최종 수정 시간 / false: 내용
+		 - `public abstract long size() throws IOException`
+		 	 - 파일의 크기 반환
+		 - `public abstract FileChannel truncate(long size) throws IOException`
+		 	 - 채널의 크기(?) 설정, 
+		 - `transferFrom(ReadableByteChannel src, long position, long count)`
+		 	 - FileChannels에 대해 ReadableByteChannel인스턴스인 채널(src)로부터 읽어들인다.
+		 	 - read()메서드보다 빠름
+		 - `transferTo(long position, long count, WritableByteChannel target)`
+		 	 - FileChannels에 대해 WritableByteChannel 인스턴스(target)로 데이터를 출력한다.
+		 	 - write()메서드보다 빠름
+		 - `public final FileLock lock()`
+		 	 - 파일에 Lock을 걸어서 다른 프로세스나 스레드의 접근을 막는 메서드
+		 	 - 호출시 FileLock클래스의 인스턴스 리턴
+		 - `public abstract FileLock lock (long position, long size, boolean shared)`
+		 	 - (position ~ size)까지 일부 영역을 Lock하는 기능
+		 	 - shared, true: 공유 FileLock(2개 ↥), false: 비공유 FileLock(독점)
+		 - `public final FileLock tryLock()`
+		 	 - 다른 Thread에서 Lock을 걸고 있는 경우 null을 리턴하여 lock()메서드가 블로킹되는 것을 방지
+		 - ※ 파일 Lock 풀기
+			 - release() 사용.-> 이 FileLock이 release()된것인지 아닌지는 isValid()로 알 수 있다.
+			 - FileLock에 연결된 하부 채널이 close()된 경우
+		 	 - 자바가상머신이 종료된경우
+		 - `public abstract MappedByteBuffer map(FileChannel.MapMode mode, long position, long size)`
+		 	 - 파일의 영역을 position의 위치에 size만큼 직접 메모리에 매핑
+		 	   ➜ 자주 읽거나 쓰는 파일에 유리
+		 	 - MappedByteBuffer의 리턴형을 사용하는데 Heap이 아닌 Java가 관리하는 일반 메모리 영역을 따로 잡음
+		 	   ➜ 준비시간이 많이 걸림
+	 	       ➜ 사이즈가 큰 파일에 유리
+	 	     - mode의 경우 MappedByteBuffer를 파일로 사용할 때 어떤 방식으로 사용할 지 설정, 상수로 이미 선언되어 있음
+	 	     	 - READ_ONLY: 읽기전용
+	 	     	 - READ_WRITE: 읽기/쓰기
+	 	     	 - PRIVATE: copy-on-write, 읽기/쓰기가 가능하지만 쓰기의 경우 복사본을 만들어 변화내용 적용
 
 
 
@@ -185,10 +196,16 @@
 
  - [Developer](http://devshock.tistory.com/55?category=692562 "Developer")
 	 - 채널(Channel)의 일부분
+ - [eincs](http://eincs.com/2009/08/java-nio-bytebuffer-channel-file/#2-2-nioeseo-system-calleul-ganjeobjeogeulo-sayongganeunghage-haejugi-ddaemune-bbaleuda "eincs")
+	 - 전반적으로 복습할때 좋아요. 정리
+
+
 
  - [One Day One Line / ByteBuffer vs Channel ](http://killsia.tistory.com/entry/NIO-JAVA-NIO의-ByteBuffer와-Channel로-File-Handling에서-더-좋은-Perfermance-내기?category=426417 "ByteBuffer vs Channel")
 
  - [One Day One Line / IO vs NIO Performance](http://sooin01.tistory.com/entry/IO-vs-NIO-performance-compare-성능-비교 "IO vs NIO Performance")
+
+
 
 
 
