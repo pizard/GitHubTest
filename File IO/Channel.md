@@ -49,7 +49,7 @@
  	 - Method()
 	 	 - `public int write(ByteBuffer src) throws IOException`
 	 	 	 - 채널에 데이터를 출력 (허용 범위: position ~ limit)
-	 	 	 - return 값(int)는 출력하는 데이터의 수
+	 	 	 - return 값(int)은 출력하는 데이터의 수
 	 	 	 - Error Message
 	 	 	 	 - NonWritableChannelException - 보낼 채널으로 출력이 불가능한 경우
 				 - ClosedChannelException - 보낼 채널이 닫혀있는 경우
@@ -166,82 +166,11 @@
 		 - 의문점
 			 - 1-2-3-4의 순서로 진행하였는데 왠지 모르지만 4번 실험에서 처음에 반복해서 4초대가 나왔었음, restart가 아닌 terminate후 다시 하니 계속 0.2 ~ 0.3의 시간이 나왔옴
 			 - 10회씩 실험을 진행하였는데 횟수가 늘어날수록 급격하게 느려지는 경우가 있는데 이게 설계의 오류로 제대로 닫히지 않고 돌아가는 것인지... 알아봐야할텐데...
- - **SelectableChannel**
- 	 - Selector에 의한 관리나 Non-Blocking I/O를 위한 기본적 기능을 가진 abstract class
- 	 - AbstractInterruptibleChannel를 상속받아 비동기 중단 가능, Non-blocking I/O가능
- 	 - 구성
- 	 	 - SelectableChannel 클래스 : 채널로서 관리대상
-		 - Selector 클래스 : 채널 관리자
-		 - SelectionKey 클래스 : 채널들을 다룰때 필요한 정보
-		 - non-blocking I/O의 지원을 해줌
-	 - method()
-	 	 - public final SelectionKey register (Selector sel, int ops)
-	 		 - 현재 채널을 sel로 지정된 selector에 등록하되 어떤 입출력 동작(ops)에 대해 선택할 것인지 지정한다.
-	 		 - SelctionKey 클래스의 인스턴스를 리턴한다.
-	 		 - 하나의 SelectableChannel을 여러 개의 Selector에 등록하는 것은 불가능
-	 	 - public abstract SelectionKey register (Selector sel, int ops, Object att)
-	 	 	 - 기능은 갖고 추가 인자로 해당 채널에 부가적으로 필요한 객체를 지정한 att가 추가되었음
-	 	 - public abstract boolean isRegistered()
-	 	 	 - 현재 이 채널이 selector에 등록 되어 있는지를 판단
-	 	 - public abstract SelectableChannel configureBlocking (boolean block)
-	 	 	 - 채널의 입출력 모드를 선택한다. true: blocking I/O, false: non=blocking I/O
-	 	 - public abstract boolean isBlocking()
-	 	 	 - 현재의 채널의 입출력 모드를 확인(blocking/non-blocking)
-	 	 - public abstract SelectionKey keyFor(Selector sel)
-	 	 	 - selector에 해당 채널이 등록되어 있는지 확인
-	 	 - public abstract int validOps()
-	 	 	 - 현재 채널의 입쳘력 동작을 리턴(read/write/accept/connect)
-	 	 	 - 서버 소켓 채널의 경우 OP_ACCEPT만 가능 
- - **Selector**
- 	 - SelectableChannel 관리
- 	 - SelectionKey의 인스턴스로 관리
-	 - method()
-	 	 - public static Selector open()
-	 	 	 - selector를 얻는다.
-	 	 	 - 인자가 없이 사용되면 
-	 	 	 - `Selector s = Selector.open()`
-	 	 - public abstract void close()
-	 	 	 - selector를 닫는다. 
-	 	 	 - selector가 관리중 이었던 SelectionKey 또한 모두 닫힌다.
-	 	 - public abstract boolean isOpen()
-	 	 	 - selector가 닫혔는지 아닌지 여부를 리턴
-	 	 - public abstract Set keys()
-	 	 	 - 채널이 등록될때 생성된 SelectionKey를 Set객체로 리턴
-	 	 - public abstract Set selectedKeys()
-	 	 	 - selector가 선택한 SelectionKey를 Set객체로 리턴
-	 	 	 - 등록된 SelectionKey들 중 동작이 일어난 SelectionKey의미
-	 	 - public abstract int select() / selectNow()
-	 	 	 - SelectionKey들 중 해당 동작(ops)이 일어난 SelectionKey들을 SelectionKey리스트에 포함시키는 메서드로서 실제 해당 동작이 일어난 SelectionKey의 개수를 리턴
-	 	 	 - select의 경우 준비가 될때까지 블로킹되고 selectNow는 호출 즉시 리턴되는 점이 다름
-	 	 - public abstract Selector wakeup()
-	 	 	 - select()가 블로킹 되었을때 이를 깨워주는 메서드
 
 
- - **SelectionKey**
-	 - SeletableChannel을 선택하는데 기준이 되는 동작(ops), 부가정보(att)와 이에 연결되어 있는 Selector를 함께 표현하는 클래스로 정보 클래스
-	 - 클래스 변수
-	 	 - public static final int OP_ACCEPT
-	 	 - public static final int OP_CONNECT
-	 	 - public static final int OP_READ
-	 	 - public static final int OP_WRITE
-	 - method()
-	 	 - public abstract int interstOps()
-	 	 	 - 해당 동작을 위의 값들로 리턴(?)
-	 	 - public abstract SelectionKey interestOps(int ops)
-	 	 	 - 해당 동작들을 지정
-	 	 - public final boolean isAcceptable()
-	 	 - public final boolean isConnectable()
-	 	 - public final boolean isReadable()
-	 	 - public final boolean isWritable()
-	 	 	 - 해당 동작들의 유효성 점검
-	 	 - public final Object attach(Object ob)
-	 	 	 - 채널 등록시 함께 등록될 객체(채널의 정보를 담고있음)를 지정
-	 	 - public final Object attachment()
-	 	 	 - attach(), register()로 추가로 지정된 객체를 리턴
-	 	 - public abstract SelectableChannel channel()
-	 	 	 - 연결된 SelectableChannel 인스턴스를 리턴
-	 	 - public abstract Selector selector()
-	 	 	 - 연결된 Selector 인스턴스를 리턴
+
+
+
 
  - **ServerSocketChannel**
  	 - ServerSocket클래스를 Channel로 다루기 위해 쓰는 SelectableChannel
@@ -310,8 +239,7 @@
 ### JAVA NIO - channel은 왜 그리고 언제 쓰나?
 
 ### 채널을 사용했을 때의 장점
- - 
- - 
+
 
 ### 소켓 채널과 관련하여 자바는 3종류의 패키지를 제공한다.
  - 'java.nio'패키지는 바이트 버퍼와 관련된 클래스를 지원한다. 소켓 채널 프로그램은 스트림을 사용할 수 없는 대신 바이트 버퍼를 지원한다.
