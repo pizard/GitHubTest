@@ -193,9 +193,113 @@
 	 	 	 - 현재 채널의 입쳘력 동작을 리턴(read/write/accept/connect)
 	 	 	 - 서버 소켓 채널의 경우 OP_ACCEPT만 가능 
  - **Selector**
+ 	 - SelectableChannel 관리
+ 	 - SelectionKey의 인스턴스로 관리
+	 - method()
+	 	 - public static Selector open()
+	 	 	 - selector를 얻는다.
+	 	 	 - 인자가 없이 사용되면 
+	 	 	 - `Selector s = Selector.open()`
+	 	 - public abstract void close()
+	 	 	 - selector를 닫는다. 
+	 	 	 - selector가 관리중 이었던 SelectionKey 또한 모두 닫힌다.
+	 	 - public abstract boolean isOpen()
+	 	 	 - selector가 닫혔는지 아닌지 여부를 리턴
+	 	 - public abstract Set keys()
+	 	 	 - 채널이 등록될때 생성된 SelectionKey를 Set객체로 리턴
+	 	 - public abstract Set selectedKeys()
+	 	 	 - selector가 선택한 SelectionKey를 Set객체로 리턴
+	 	 	 - 등록된 SelectionKey들 중 동작이 일어난 SelectionKey의미
+	 	 - public abstract int select() / selectNow()
+	 	 	 - SelectionKey들 중 해당 동작(ops)이 일어난 SelectionKey들을 SelectionKey리스트에 포함시키는 메서드로서 실제 해당 동작이 일어난 SelectionKey의 개수를 리턴
+	 	 	 - select의 경우 준비가 될때까지 블로킹되고 selectNow는 호출 즉시 리턴되는 점이 다름
+	 	 - public abstract Selector wakeup()
+	 	 	 - select()가 블로킹 되었을때 이를 깨워주는 메서드
 
 
+ - **SelectionKey**
+	 - SeletableChannel을 선택하는데 기준이 되는 동작(ops), 부가정보(att)와 이에 연결되어 있는 Selector를 함께 표현하는 클래스로 정보 클래스
+	 - 클래스 변수
+	 	 - public static final int OP_ACCEPT
+	 	 - public static final int OP_CONNECT
+	 	 - public static final int OP_READ
+	 	 - public static final int OP_WRITE
+	 - method()
+	 	 - public abstract int interstOps()
+	 	 	 - 해당 동작을 위의 값들로 리턴(?)
+	 	 - public abstract SelectionKey interestOps(int ops)
+	 	 	 - 해당 동작들을 지정
+	 	 - public final boolean isAcceptable()
+	 	 - public final boolean isConnectable()
+	 	 - public final boolean isReadable()
+	 	 - public final boolean isWritable()
+	 	 	 - 해당 동작들의 유효성 점검
+	 	 - public final Object attach(Object ob)
+	 	 	 - 채널 등록시 함께 등록될 객체(채널의 정보를 담고있음)를 지정
+	 	 - public final Object attachment()
+	 	 	 - attach(), register()로 추가로 지정된 객체를 리턴
+	 	 - public abstract SelectableChannel channel()
+	 	 	 - 연결된 SelectableChannel 인스턴스를 리턴
+	 	 - public abstract Selector selector()
+	 	 	 - 연결된 Selector 인스턴스를 리턴
 
+ - **ServerSocketChannel**
+ 	 - ServerSocket클래스를 Channel로 다루기 위해 쓰는 SelectableChannel
+ 	 - 독자적으로 소켓의 역할을 하지는 못하지만 소켓 클래스를 내부에 갖고 있으면서 이들의 기능을 채널화하는데 이용
+ 	 - 생성 순서
+ 	 	 1. ServerSocketChannel 얻기
+ 	 	 	`ServerSocketChannel server = ServerSocketChannel.open();`
+ 	 	 2. 내부 소켓 얻기
+ 	 	 	`ServerSocket socket=server.socket();`
+ 	 	 3. binding
+ 	 	 	 ```
+ 	 	 	 SocketAddress addr = new InetSocketAddress(포트번호);
+ 	 	 	 socket.bind(addr);
+ 	 	 	 ```
+ 	 - method()
+ 	 	 - public abstract SocketChannel accept()
+ 	 	 	 - 소켓에 대한 접속을 받아들여 SocketChannel을 리턴
+ 	 	 - public static ServerSocketChannel open()
+ 	 	 	 - ServerSocketChannel을 얻는다.
+ 	 	 	 - 리턴된 Channel은 아직 bind되지 않은 상태이므로 소켓의 bind 메소드를 사용한 특정 주소로의 binding 필요
+ 	 	 - public abstract ServerSocket socket()
+ 	 	 	 - 내부 소켓을 얻는다.
+ 	 	 - public final int validOps()
+ 	 	 	 - 현재 채널이 할 수 있는 해당 동작(ops)을 리턴한다.
+ 	 	 	 - 서버소켓의 경우 SelectionKey.OP_ACCEPT만 가능
+
+
+ - **SocketChannel**
+ 	 - Socket클래스를 Channel로 다루기 위해 쓰는 SelectableChannel
+ 	 - 독자적으로 소켓의 역할을 하지는 못하지만 소켓 클래스를 내부에 갖고 있으면서 이들의 기능을 채널화하는데 이용
+ 	 - 연결 방식
+ 	 	 1. 접속된 소켓채널 연결
+ 	 	 	```
+ 	 	 	SocketAddress addr = new InetSocketAddress("ip주소", 포트번호);
+ 	 	 	SocketChannel socket = SocketChannel.open(addr);
+ 	 	 	```
+ 	 	 2. 만든 후 연결, connect()
+ 	 	 	```
+ 	 	 	SocketAddress addr = new InetSocketAddress("ip주소", 포트번호);
+ 	 	 	SocketChannel socket = SocketChannel.open();
+ 	 	 	socket.connect(addr);
+ 	 	 	```
+ 	 - method()
+ 	 	 - public abstract boolean connect (SocketAddress remote)
+ 	 	 	 - 인자로 들어온 SocketAddress 객체 정보를 갖고 현재 채널에 소켓을 접속한다.
+ 	 	 	 - 연결에 실패하면 false를 리턴
+ 	 	 - public abstract boolean finishConnect()
+ 	 	 	 - 소켓 채널의 접속 처리를 완료
+ 	 	 	 - Non-blocking 방식의 경우 '연결방식 2'로 접속한 경우 즉시 연결작업이 끝나지 않을 수 있어서 이 메서드가 false를 리턴하게 되므로, 이 메소드를 사용하여 끊어줘야 함(?)
+ 	 	 - public abstract boolean isConnected()
+ 	 	 	 - 채널소켓이 접속이 되었는지 유무를 리턴
+ 	 	 - public abstract boolean isConnectionPending()
+ 	 	 	 - 채널상에서 접속 조작이 진행 중인지를 판단, 즉 접속이 시작되고 완료되지 않은 경우
+ 	 	 	 - true인 경우 finishConnect()필요
+ 	 	 - public static SocketChannel open()
+ 	 	 	 - 접속되지 않은 소켓 채널을 리턴
+ 	 	 - public static SocketChannel open(SocketAddress remote)
+ 	 	 	 - 접속된 소켓채널을 리턴
 
 # ///////////////////////////////////// 진행 중 /////////////////////////////////////
 
