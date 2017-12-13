@@ -67,7 +67,7 @@
 	 	 	 - ByteBuffer의 데이터를 offset에서 length만큼 읽어드림
 	 - WritableByteChannel의 하위 인터페이스(Gather) Method()
 	 	 - `public long write(ByteBuffer [] dsts) throws IOException `
-	 	 	 - ByteBuffer의 데이터를 Channel로 출력v 
+	 	 	 - ByteBuffer의 데이터를 Channel로 출력 
 		 - `public long write(ByteBuffer [] dsts, int offset, int length) throws IOException`
 	 	 	 - ByteBuffer의 데이터를 offset에서 length만큼 Channel로 출력
  - **ByteChannel**
@@ -151,7 +151,49 @@
 	 	     - mode의 경우 MappedByteBuffer를 파일로 사용할 때 어떤 방식으로 사용할 지 설정, 상수로 이미 선언되어 있음
 	 	     	 - READ_ONLY: 읽기전용
 	 	     	 - READ_WRITE: 읽기/쓰기
-	 	     	 - PRIVATE: copy-on-write, 읽기/쓰기가 가능하지만 쓰기의 경우 복사본을 만들어 변화내용 적용
+	 	     	 - PRIVATE: copy-on-write, 실제 파일에 영향을 미치지 않고 받는 버퍼 생성
+	 - 사용 예시 및 속도 비교
+		<img src="../image/File IO/Channel/bufferClassType.png"></img>
+		 - 진행 방식
+		 	 - 약 409MB크기의 동영상 파일을 반복해서 Copy함
+		 	 - 1회 실행당 1회 복사로 반복해서 재시작하여 실험을 진행하였음
+		 	 - 시간측정은 mill으로 측정하여 끝시간 - 시작시간으로 측정
+		 - Transfer > Map > NIO > IO를 예상하였으나 Transfer > Map > I/O > NIO 의 결과가 나왔음
+			 - 일단 NIO에서 allocateDirect()가 아닌 allocate()를 사용하여 NIO의 장점을 살리지 못했음
+			 ➜ allocateDirect()로 수정하고 이외에도 몇몇 부분들을 개선 후 재실험 필요
+			 - Thread의 형식으로 여러 파일들을 복사한 것이 아니라 한 파일을 1회씩만 끊어 수행시켜 Non-blocking의 장점도 살리지 못했음
+		 	 ➜ 이건 내용을 좀 수정해서 반복해서 받으려고도 해 보았으나 I/O의 경우 첫번째 시행만 제대로 시행되었고 그 이후에는 Blocking되어 동작하지 않았으며 다른 수행에서도 4-5회에서 오류가 발생하였으며 한파일에 계속 다시 넣는 방식 이었다는 등 한계가 뚜렷했음 있었음(추후 진행)
+		 - 의문점
+			 - 1-2-3-4의 순서로 진행하였는데 왠지 모르지만 4번 실험에서 처음에 반복해서 4초대가 나왔었음, restart가 아닌 terminate후 다시 하니 계속 0.2 ~ 0.3의 시간이 나왔옴
+			 - 10회씩 실험을 진행하였는데 횟수가 늘어날수록 급격하게 느려지는 경우가 있는데 이게 설계의 오류로 제대로 닫히지 않고 돌아가는 것인지... 알아봐야할텐데...
+ - **SelectableChannel**
+ 	 - Selector에 의한 관리나 Non-Blocking I/O를 위한 기본적 기능을 가진 abstract class
+ 	 - AbstractInterruptibleChannel를 상속받아 비동기 중단 가능, Non-blocking I/O가능
+ 	 - 구성
+ 	 	 - SelectableChannel 클래스 : 채널로서 관리대상
+		 - Selector 클래스 : 채널 관리자
+		 - SelectionKey 클래스 : 채널들을 다룰때 필요한 정보
+		 - non-blocking I/O의 지원을 해줌
+	 - method()
+	 	 - public final SelectionKey register (Selector sel, int ops)
+	 		 - 현재 채널을 sel로 지정된 selector에 등록하되 어떤 입출력 동작(ops)에 대해 선택할 것인지 지정한다.
+	 		 - SelctionKey 클래스의 인스턴스를 리턴한다.
+	 		 - 하나의 SelectableChannel을 여러 개의 Selector에 등록하는 것은 불가능
+	 	 - public abstract SelectionKey register (Selector sel, int ops, Object att)
+	 	 	 - 기능은 갖고 추가 인자로 해당 채널에 부가적으로 필요한 객체를 지정한 att가 추가되었음
+	 	 - public abstract boolean isRegistered()
+	 	 	 - 현재 이 채널이 selector에 등록 되어 있는지를 판단
+	 	 - public abstract SelectableChannel configureBlocking (boolean block)
+	 	 	 - 채널의 입출력 모드를 선택한다. true: blocking I/O, false: non=blocking I/O
+	 	 - public abstract boolean isBlocking()
+	 	 	 - 현재의 채널의 입출력 모드를 확인(blocking/non-blocking)
+	 	 - public abstract SelectionKey keyFor(Selector sel)
+	 	 	 - selector에 해당 채널이 등록되어 있는지 확인
+	 	 - public abstract int validOps()
+	 	 	 - 현재 채널의 입쳘력 동작을 리턴(read/write/accept/connect)
+	 	 	 - 서버 소켓 채널의 경우 OP_ACCEPT만 가능 
+ - **Selector**
+
 
 
 
