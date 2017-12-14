@@ -169,69 +169,19 @@
 
 
 
-
-
-
- - **ServerSocketChannel**
- 	 - ServerSocket클래스를 Channel로 다루기 위해 쓰는 SelectableChannel
- 	 - 독자적으로 소켓의 역할을 하지는 못하지만 소켓 클래스를 내부에 갖고 있으면서 이들의 기능을 채널화하는데 이용
- 	 - 생성 순서
- 	 	 1. ServerSocketChannel 얻기
- 	 	 	`ServerSocketChannel server = ServerSocketChannel.open();`
- 	 	 2. 내부 소켓 얻기
- 	 	 	`ServerSocket socket=server.socket();`
- 	 	 3. binding
- 	 	 	 ```
- 	 	 	 SocketAddress addr = new InetSocketAddress(포트번호);
- 	 	 	 socket.bind(addr);
- 	 	 	 ```
- 	 - method()
- 	 	 - public abstract SocketChannel accept()
- 	 	 	 - 소켓에 대한 접속을 받아들여 SocketChannel을 리턴
- 	 	 - public static ServerSocketChannel open()
- 	 	 	 - ServerSocketChannel을 얻는다.
- 	 	 	 - 리턴된 Channel은 아직 bind되지 않은 상태이므로 소켓의 bind 메소드를 사용한 특정 주소로의 binding 필요
- 	 	 - public abstract ServerSocket socket()
- 	 	 	 - 내부 소켓을 얻는다.
- 	 	 - public final int validOps()
- 	 	 	 - 현재 채널이 할 수 있는 해당 동작(ops)을 리턴한다.
- 	 	 	 - 서버소켓의 경우 SelectionKey.OP_ACCEPT만 가능
-
-
- - **SocketChannel**
- 	 - Socket클래스를 Channel로 다루기 위해 쓰는 SelectableChannel
- 	 - 독자적으로 소켓의 역할을 하지는 못하지만 소켓 클래스를 내부에 갖고 있으면서 이들의 기능을 채널화하는데 이용
- 	 - 연결 방식
- 	 	 1. 접속된 소켓채널 연결
- 	 	 	```
- 	 	 	SocketAddress addr = new InetSocketAddress("ip주소", 포트번호);
- 	 	 	SocketChannel socket = SocketChannel.open(addr);
- 	 	 	```
- 	 	 2. 만든 후 연결, connect()
- 	 	 	```
- 	 	 	SocketAddress addr = new InetSocketAddress("ip주소", 포트번호);
- 	 	 	SocketChannel socket = SocketChannel.open();
- 	 	 	socket.connect(addr);
- 	 	 	```
- 	 - method()
- 	 	 - public abstract boolean connect (SocketAddress remote)
- 	 	 	 - 인자로 들어온 SocketAddress 객체 정보를 갖고 현재 채널에 소켓을 접속한다.
- 	 	 	 - 연결에 실패하면 false를 리턴
- 	 	 - public abstract boolean finishConnect()
- 	 	 	 - 소켓 채널의 접속 처리를 완료
- 	 	 	 - Non-blocking 방식의 경우 '연결방식 2'로 접속한 경우 즉시 연결작업이 끝나지 않을 수 있어서 이 메서드가 false를 리턴하게 되므로, 이 메소드를 사용하여 끊어줘야 함(?)
- 	 	 - public abstract boolean isConnected()
- 	 	 	 - 채널소켓이 접속이 되었는지 유무를 리턴
- 	 	 - public abstract boolean isConnectionPending()
- 	 	 	 - 채널상에서 접속 조작이 진행 중인지를 판단, 즉 접속이 시작되고 완료되지 않은 경우
- 	 	 	 - true인 경우 finishConnect()필요
- 	 	 - public static SocketChannel open()
- 	 	 	 - 접속되지 않은 소켓 채널을 리턴
- 	 	 - public static SocketChannel open(SocketAddress remote)
- 	 	 	 - 접속된 소켓채널을 리턴
+### 넌블로킹 채널
+ - 특징
+ 	 - connect(), accept(), read(), write()메소드에 블로킹이 없음, 즉시 응답
+ 	 ➜ 즉 다음과 같은 코드에서 응답이 없는 경우 무한 루프를 돌게 됨
+ 	 ```
+ 	 	while (true) {
+    		SocketChannel socketChannel = serverSocketChannel.accept();
+    		...
+		}
+ 	 ```
+ 	 - 
 
 # ///////////////////////////////////// 진행 중 /////////////////////////////////////
-
 
 
 ## [NIO] JAVA NIO 의 ByteBuffer와 Channel 클래스 사용하기!
