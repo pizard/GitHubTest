@@ -2,21 +2,23 @@
  - 정의
  	 - 하나의 쓰레드에서 다중의 채널로부터 들어오는 입/출력 데이터를 처리할 수 있도록 해 주는 멀티 플렉서, 논블럭킹 입출력을 위한 핵심 요소
  	 - 여러 SelectableChannel을 자신에게 등록하게 하고 등록된 Selectable Channel의 이벤트 요청들을 나눠서 적절자에게 보내 처리하는 것
- - 탄생 배경(Blocking 방식의 단점)
- 	 - OS에서 Thread들 간 Context-switching은 높은 비용과 메모리 소모를 요구
-	   ➜ Selector를 통해 하나의 Thread만 사용
-	 - 언제 클라이언트가 요청 할 지 모르기 때문에 accept(), read()등에서 Blocking되었음
-	   ➜ SocketChannel 당 하나의 스레드가 할당
-	   ➜ 연결된 클라이언트의 수가 과도하게 늘어나면 기능저하 문제가 발생
-	   ➜ 그동안은 스레드 풀을 통해 해결
- 	 - Selector가 없는 Channel 방식에서는 accecpt(), read()등의 Method에서 블로킹 되지 않고 바로 리턴 하기 때문에 아래의 경우 클라이언트가 연결 요청을 보내기 전까지 무한루프를 돌기 때문에 CPU가 과도하게 소비 될 수 있음
+ - 탄생 배경
+ 	 1. non-Blocking방식은 connect(), accept(), read(), write()메소드에서 블로킹이 없음, 즉시 응답
+	  ➜ 즉 다음과 같은 코드에서 응답이 없는 경우 무한 루프를 돌게 됨
+	  ➜ CPU가 과도하게 소비 
 	  ```
 	  	while (true) {
     		SocketChannel socketChannel = serverSocketChannel.accept();
     		...
 		}
 	  ```
- - 특징
+ 	 2. Blocking 방식은 connect(), accept(), read(), write()등에서 블로킹
+	   ➜ SocketChannel 당 하나의 스레드가 할당
+	   ➜ 연결된 클라이언트의 수가 과도하게 늘어나면 기능저하 문제가 발생
+	   ➜ 그동안은 스레드 풀을 통해 해결
+ 	 3. OS에서 Thread들 간 Context-switching은 높은 비용과 메모리 소모를 요구
+	   ➜ Selector를 통해 하나의 Thread만 사용
+ - 특징`
  	 - Mulltiplex IO 가능(필수는 아니고 효울적임을 의미)
  	   ＊Multiplex IO: 단 하나의 스레드로 동시에 많은 IO채널들을 효율적으로 관리하여 좀 더 적은 CPU와 자원을 소모
  	 - selector에 등록할 수 잇는 채널은 SelectableChannel의 하위 채널만 가능한데 non-blocking 설정 된 것만 가능
@@ -31,6 +33,7 @@
  	 3. 작업 스레드가 선택된 키 셋에 있는 키를 하나씩 꺼내와 키와 연관된 채널 작업을 처리
 	 4. 작업 스레드가 선택된 키 셋에 있는 모든 키를 처리하게 되면 선택된 키셋(selected-set)은 비워짐
 	 5. Selector는 다시 관심키셋에서 작업 처리 준비가 된 키들을 선택된 키셋(selected-set)을 채움
+<img src="../image/File IO\Selector\selector1.png"></img>
 
 
 ### Selector 클래스
@@ -135,6 +138,72 @@
 		 ➜ 꼭 Key 삭제시 함께 삭제해야 함
 
 
+### **ServerSocketChannel**
+  - ServerSocket클래스를 Channel로 다루기 위해 쓰는 SelectableChannel
+  - 독자적으로 소켓의 역할을 하지는 못하지만 소켓 클래스를 내부에 갖고 있으면서 이들의 기능을 채널화하는데 이용
+  - 생성 순서
+  	 1. ServerSocketChannel 얻기
+  	 	`ServerSocketChannel server = ServerSocketChannel.open();`
+  	 2. 내부 소켓 얻기
+  	 	`ServerSocket socket=server.socket();`
+  	 3. binding, 서버 정보 넣기
+  	 	 ```
+  	 	 SocketAddress addr = new InetSocketAddress(포트번호);
+  	 	 socket.bind(addr);
+  	 	 ```
+  - method()
+  	 - public abstract SocketChannel accept()
+  	 	 - 소켓에 대한 접속을 받아들여 SocketChannel을 리턴
+  	 - public static ServerSocketChannel open()
+  	 	 - ServerSocketChannel을 얻는다.
+  	 	 - 리턴된 Channel은 아직 bind되지 않은 상태이므로 소켓의 bind 메소드를 사용한 특정 주소로의 binding 필요
+  	 - public abstract ServerSocket socket()
+  	 	 - 내부 소켓을 얻는다.
+  	 - public final int validOps()
+  	 	 - 현재 채널이 할 수 있는 해당 동작(ops)을 리턴한다.
+  	 	 - 서버소켓의 경우 SelectionKey.OP_ACCEPT만 가능
+
+
+### **SocketChannel**
+ - Socket클래스를 Channel로 다루기 위해 쓰는 SelectableChannel
+ - 독자적으로 소켓의 역할을 하지는 못하지만 소켓 클래스를 내부에 갖고 있으면서 이들의 기능을 채널화하는데 이용
+ - 연결 방식
+ 	 1. 접속된 소켓채널 연결
+ 	 	```
+ 	 	SocketAddress addr = new InetSocketAddress("ip주소", 포트번호);
+ 	 	SocketChannel socket = SocketChannel.open(addr);
+ 	 	```
+ 	 2. 만든 후 연결, connect()
+ 	 	```
+ 	 	SocketAddress addr = new InetSocketAddress("ip주소", 포트번호);
+ 	 	SocketChannel socket = SocketChannel.open();
+ 	 	socket.connect(addr);
+ 	 	```
+ - method()
+ 	 - public abstract boolean connect (SocketAddress remote)
+ 	 	 - 인자로 들어온 SocketAddress 객체 정보를 갖고 현재 채널에 소켓을 접속한다.
+ 	 	 - 연결에 실패하면 false를 리턴
+ 	 - public abstract boolean finishConnect()
+ 	 	 - 소켓 채널의 접속 처리를 완료
+ 	 	 - Non-blocking 방식의 경우 '연결방식 2'로 접속한 경우 즉시 연결작업이 끝나지 않을 수 있어서 이 메서드가 false를 리턴하게 되므로, 이 메소드를 사용하여 끊어줘야 함(?)
+ 	 - public abstract boolean isConnected()
+ 	 	 - 채널소켓이 접속이 되었는지 유무를 리턴
+ 	 - public abstract boolean isConnectionPending()
+ 	 	 - 채널상에서 접속 조작이 진행 중인지를 판단, 즉 접속이 시작되고 완료되지 않은 경우
+ 	 	 - true인 경우 finishConnect()필요
+ 	 - public static SocketChannel open()
+ 	 	 - 접속되지 않은 소켓 채널을 리턴
+ 	 - public static SocketChannel open(SocketAddress remote)
+ 	 	 - 접속된 소켓채널을 리턴
+
 ### 참고
+ - [palpit's log-b 1](http://palpit.tistory.com/645 "[Java] NIO 기반 입출력 및 네트워킹 - TCP 넌블로킹 채널") / [palpit's log-b 2](http://palpit.tistory.com/644 "[Java] NIO 기반 입출력 및 네트워킹 - TCP 블로킹 채널")
+ 	 - Selector
+ 	 - Selector 클래스
+ 	 - SelectableChannel 클래스
+ 	 - SelectionKey 클래스
+ 	 - 채팅 프로그램
  - [Minsub's Blog](http://gyrfalcon.tistory.com/entry/Java-NIO-Channel "[Java] NIO Channel [펌]")
+ 	 - ServerSocketChannel
+ 	 - SocketChannel
  - [My Story](http://hjhistory.tistory.com/entry/NIO-셀렉터-부분-정리 "My Story")
