@@ -14,19 +14,25 @@
 	<img src="../image/File IO/Channel/bufferClassType.png"></img>
 	 - 이 중 MappedByteBuffer는 ByteBuffer의 하위 클래스로 파일의 내용에 랜덤하게 접근하기 위해서 파일의 내용을 메모리와 맵핑시킨 버퍼
 
-	### 2. 메모리 위치(Direct Buffer)
-	 - 정의
-		 - 운영체제가 관리하는 메모리 공간을 이용하는 버퍼
-	 - 특징
-		 - 운영체제의 메모리를 할당받기 위해 운영체제의 네이티브 C함수를 호출해야 하고 여러 잡다한 처리를 해야 하므로 상대적으로 생성이 느림
-		 ➜ 자주 생성하기 보다는 한번 생성 후 재사용이 하는 것이 적합함
-		 - 운영체제가 허용하는 범위 내에서 대용량 버퍼를 생성할 수 있음
-		 - ByteBuffer만 가능, 기본형
-		 ➜ 운영체제가 이용하는 가장 기본적인 데이터 단위가 바이트이고, 시스템 메모리 또한 순차적인 바이트들의 집합이기 때문
-		 - **채널(Channel)을 사용해서 버퍼의 데이터를 읽고 저장할 경우에만 운영체제의 native I/O를 수행**
-		 - 채널(Channel)을 이용하지 않고 ByteBuffer의 get()/put()메소드를 사용한다면 내부적으로 JNI(Java Native Interface)를 호출하여 native I/O를 수행하기 때문에 JNI호출이라는 오버헤더가 추가됨
+### 2. 메모리 위치(Direct Buffer)
+ - 정의
+	 - 운영체제가 관리하는 메모리 공간을 이용하는 버퍼
+ - 특징
+	 - 운영체제의 메모리를 할당받기 위해 운영체제의 네이티브 C함수를 호출해야 하고 여러 잡다한 처리를 해야 하므로 상대적으로 생성이 느림
+	 ➜ 자주 생성하기 보다는 한번 생성 후 재사용이 하는 것이 적합함
+	 - 운영체제가 허용하는 범위 내에서 대용량 버퍼를 생성할 수 있음
+	 - ByteBuffer만 가능, 기본형
+	 ➜ 운영체제가 이용하는 가장 기본적인 데이터 단위가 바이트이고, 시스템 메모리 또한 순차적인 바이트들의 집합이기 때문
+	 - **채널(Channel)을 사용해서 버퍼의 데이터를 읽고 저장할 경우에만 운영체제의 native I/O를 수행**
+	 - 채널(Channel)을 이용하지 않고 ByteBuffer의 get()/put()메소드를 사용한다면 내부적으로 JNI(Java Native Interface)를 호출하여 native I/O를 수행하기 때문에 JNI호출이라는 오버헤더가 추가됨
 	 ➜ 그냥 get()/put()을 사용한다면 오히려 NonDirect Buffer의 성능이 더 좋게 나올 수도 있음
 	 ※ JNI(Java Native Interface): 자바 코드에서 C 함수를 호출할 수 있도록 해주는 API
+	 - JVM의 Heap GC범위의 밖에 존재하기 때문에 앱의 메모리 발자취가 명백하지 않고 관리하기 쉽지 않다.
+ - **사용처**
+ 	 - Buffer의 사이즈가 큰 경우
+ 	 - Direct Buffer이 오랫동안 살아 반복 사용할 수 있는 경우(채팅 앱?)
+ 	 - 즉 만능은 아니다...ㅜ
+ 	 - [JBoss Devsloper](https://developer.jboss.org/thread/82231?_sscc=t "JBoss Devsloper")
  - Function()
 	 - `allocateDirect()`
 		 - 운영체제가 관리하는 메모리에 Direct Buffer를 생성
@@ -56,6 +62,10 @@
 		 - 이미 생성되어 있는 배열을 wraping하여 Buffer 객체를 생성
 		 - 배열은 JVM 힙 메모리에 생성되므로 wrap()은 NonDirect Buffer를 생성합니다.
 		 - 이때 해당 ByteBuffer는 array배열을 참조하기 때문에 array나 ByteBuffer 한쪽이 변하면 양쪽에 반영 됨
+
+### 4. Direct Buffer vs NonDirectBuffer
+ - NonDirectBuffer
+ 	 - 
 
 ## byte 해석순서(ByteOrder)
  - Big Endian
