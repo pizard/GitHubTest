@@ -6,6 +6,6 @@
  	 - Connector부분에 address확인!
 	 `<Connector acceptCount="100" address="0.0.0.0" connectionTimeout="20000" disableUploadTimeout="true" emptySessionPath="true" enableLookups="false" maxHttpHeaderSize="8192" maxThreads="250" port="6080" protocol="HTTP/1.1" redirectPort="8181"/>`
 
-### 6. 참고
+### 참고
  - [개발창고](http://asm0628.tistory.com/176 "톰캣 외부접속 허용으로 설정하기")
  	 - 톰캣 서버의 server.xml 확인
