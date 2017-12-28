@@ -25,9 +25,38 @@
  - 결과
  	 1. `echo hello && echo world`
  - 즉 명령어 사이에 &&를 넣으면 된다.
+ - 인데 원래 윈도우 서버에서 실행을 하면서 동시에 log파일이 뜨도록 하고싶었는데
+
+## CMD 명령어 한줄에 2개 사용하기
+ - 명령어
+ 	 1. `echo hello`
+ 	 2. `echo world`
+ - 결과
+ 	 1. `echo hello && echo world`
+ - 즉 명령어 사이에 &&를 넣으면 된다.
  - 인데 원래 윈도우 서버에서 실행을 하면서 동시에 log파일이 뜨도록 하고싶었는데 
 
 
+## wildfly 설정파일(standalone.xml)
+ - 위치
+	 - ...(파일위치)\wildfly-9.0.2.Final\standalone\configuration
+ - 설정
+ 	 - 아래 요런 느낌으로 수정
+ 	 ```
+ 	 <socket-binding-group name="standard-sockets" default-interface="public" port-offset="${jboss.socket.binding.port-offset:0}">
+        <socket-binding name="management-http" interface="management" port="${jboss.management.http.port:----}"/>
+        <socket-binding name="management-https" interface="management" port="${jboss.management.https.port:----}"/>
+        <socket-binding name="ajp" port="${jboss.ajp.port:----}"/>
+        <socket-binding name="http" port="${jboss.http.port:----}"/>
+        <socket-binding name="https" port="${jboss.https.port:----}"/>
+        <socket-binding name="txn-recovery-environment" port="----"/>
+        <socket-binding name="txn-status-manager" port="----"/>
+        <outbound-socket-binding name="mail-smtp">
+            <remote-destination host="localhost" port="----"/>
+        </outbound-socket-binding>
+    </socket-binding-group>
+ 	 ```
+ 	 
 ## 출처
  - [bgasparotto](https://bgasparotto.com/start-stop-restart-wildfly/ "Start, Stop and Restart Wildfly")
  	 - Start, Stop and Restart Wildfly
