@@ -37,6 +37,13 @@
  - 인데 원래 윈도우 서버에서 실행을 하면서 동시에 log파일이 뜨도록 하고싶었는데 
 
 
+## service.bat
+ - 이거 정확한 파일의 기능은 잘 모르겠다. 
+ - 아마 서비스와 관련된 배치파일인 것 같은데 이걸 종료시키고 계속 Wildfly를 실행시켰더니 계속 undelpoyed가 뜨며 실행되지 않는다.
+ - 찾기로는 Window Service에서 WildFly standalone server를 돌릴 때, standalone.bat파일을 옵션 없이 실행시킨다고 한다.
+ - 근데 이해가 안되는거는 이 파일이 꺼져있을때도 알아서 deployment 파일을 찾아가 실행자체는 시켰던거 같은데... 확인필요!
+
+
 ## wildfly 설정파일(standalone.xml)
  - 위치
 	 - ...(파일위치)\wildfly-9.0.2.Final\standalone\configuration

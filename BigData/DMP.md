@@ -6,14 +6,27 @@
  	 -  데이터 관리 플랫폼
  - 용어 정리
  	 - Programmatic Buying
- 	 - RTB(Real Time Bidding)
  	 - DMP(Data Management Platform)
+ 	 	 - 쿠키데이터를 축적하고 있는 플랫폼, 구글 검색같은 것
+ 	 - RTB(Real Time Bidding)
+ 	 	 - 실시간 경매 방식
  	 - DSP(Demand Side Platform)
+ 	 	 - 광고지면을 사려는 쪽
+ 	 - SSP(Supply Side Platform)
+ 	 	 - 광고지면을 파려는 쪽
+ 	 - Ad Exchange
+ 	 	 - DSP와 SSP의 중개업소
  	 - CPM(Cost Per Mille)
- 	 	 - 실시간 방문자 통계
+ 	 	 - 실시간 방문자 통계, 노출당 과금
  	 - CPC(Cost Per Click)
  	 	 - 클릭 당 비용
- 	 - ATL
+
+ 	 	 https://brunch.co.kr/@platina02/3
+ 	 - ATL(Above The Line)
+ 	 	 - 전통적인 광고매체 TV, 신문, 잡지, 라디오 등에 노출되는 광고
+ 	 - BTL(Below The Line)
+ 	 	 - 전통적인 광고매체를 제외한 소비자 커뮤니케이션 활동
+ 	 	 - DM, 전시 및 매장 DP, 이벤트, PPL
  	 - eCRM
 
 ### 온라인 광고 성장의 역사(DSP/DMP 생성 과정)
@@ -48,6 +61,18 @@
 	 - 구매 경험을 가진 소비자의 개인정보 샘플을 DMP시스템에 이식한 후 그와 유사한 패턴을 보이는 DMP 시스템 안의 온라인 사용자(User)들을 따로 분류(Classify)해 별도의 고객군(Cluster)으로 타깃팅
 	 기존 타깃팅 광고의 일대일 매칭과는 다른 차원으로 이용자들을 세분화(Segmentation)할 수 있게 되었음
 
+### RTB 광고
+ - RTB 시스템 과정
+ 	 1. SSP에서 쿠키 ID를 DSP에 전달
+ 	 2. DSP에서 쿠키 ID에 맞는 가격(Bidding CPM) 제시
+ 	 3. RTB시스템에 의해 낙찰
+ - RTB 매커니즘
+ 	 - 작동 원리
+ 	 	 - 자동으로 AD ID를 송출하고, 거기에 맞춰 Bidding하고 노출 여부 결정
+ 	 - 수집 정보
+ 	 	 - 쿠키 ID, 웹 사이트, 기기 종류, 장소, IP, 사용 언어, 브라우저, 쿠키 생성 시간, 노출 지면, 노출 지면의 사이즈 등등
+ 	 	 
+
 
 ### 공부할 것
  - 일단 이용자들의 개인정보들을 DMP에 넣고 이들을 분류해서 고객군으로 패턴화 시키는 작업인거 같은뎅...
@@ -57,4 +82,10 @@
 
 ### 참고
  - [HS애드 공식 블로그 HS Adzine](http://blog.hsad.co.kr/2247 "HS애드 공식 블로그 HS Adzine")
+ 	- 온라인 광고 성장의 역사(DSP/DMP 생성 과정)
+ 	- 용어 정리
+
+ - [Brunch](https://brunch.co.kr/@platina02/3 "Brunch")
+    - 용어 정리
  
+
