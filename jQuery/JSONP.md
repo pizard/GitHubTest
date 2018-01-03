@@ -100,7 +100,7 @@
 	 - json값들을 callBack으로 묶어서 return
 	 - `callBack({ "result":"success" });`
 
-### 참고
+## 참고
  - [w3schools.com](https://www.w3schools.com/js/js_json_jsonp.asp "JSONP")
 	 - 전체적인 그림
  - [Epiloum 개발노트](http://dev.epiloum.net/1311 "자바스크립트 예제로 살펴보는 JSONP의 기본원리")
