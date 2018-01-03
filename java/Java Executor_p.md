@@ -16,10 +16,8 @@
  	 - Task Queue를 이용해 Task를 관리
  	 - Executor Service가 더 이상 필요 없으면 중지
  	 - Executor Service가 멈추면 모든 Thread도 중지 
-     
-     
 
-<img width="538" height="365" src="./image/Executor API.png"></img>
+<img width="538" height="365" src="../image/Executor API.png"></img>
 ### **주요 클래스와 인터페이스**
  - Executor Interface
  	 - package: java.util.concurrent.Executor
