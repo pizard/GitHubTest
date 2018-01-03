@@ -1,12 +1,7 @@
 # jQuery.ajax()
- - 참조문서
- 	 - http://api.jquery.com/jquery.ajax/
- 	 - https://www.w3schools.com/js/js_json_jsonp.asp
-
+## jQuery.ajax(url, [,settings])
  - 정의
  	 - 비동기적 HTTP(Ajax)요청을 수행
-
-## jQuery.ajax(url, [,settings])
  - url
  	 - Type: String
  	 - 요청을 전달할 URL을 내포하고 있음
@@ -74,3 +69,8 @@
  - 보안 상의 이유로 브라우저들은 스크립트 내에서 초기화되는 cross-origin HTTP 요청을 제한합니다.
 
  
+
+## 참고
+ - [api.jQuery](http://api.jquery.com/jquery.ajax/ "jQuery")
+	 - 모든 내용
+	 - 필요 부분만 해석함
