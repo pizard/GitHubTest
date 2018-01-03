@@ -1,4 +1,4 @@
-# wildflty
+# Chapter 1.JBoss 소개
 ## JBoss 이름의 유래
  - 1999년 Mark Fleury가 EJB Container를 오픈소스로 개발하기 위해 EJBOSS(Enterprise Java Beans Open Source Software)라는 이름으로 시작한 프로젝트였지만 SUM과의 상표권 문제로 인해 앞의 E를 빼고 현재의 JBoss라는 이름이 되었습니다.
  - 2006년 4월 RedHat이 JBoss를 인수하면서 JBoss에는 여러가지 의미를 갖게 됨
@@ -15,8 +15,8 @@
  - 공통점
  	 - 소스 코드 수준에서 거의 동일한 제품
  - 차이점
- 	 - 기술지원이 필요할 때 유로 기술 지원을 받을 것인지 or 무료로 스스로가 해결할 것인지의 차이
-  --------------------- 이미지 -----------------------------
+ 	 - 기술지원이 필요할 때 유료 기술 지원을 받을 것인지 or 무료로 스스로가 해결할 것인지의 차이
+<img src="../image/server/JBoss-AS vs JBoss-EAP.png"></img>
  - JBoss-AS7
  	 - JBoss.org 커뮤니티에서 주로 기능 개발을 목적으로 하는 제품
 	 - 개발 중 발생된 버그는 수정되어 'Release'에 포함되고 메이저 버전 업그레이드는 존재
@@ -34,4 +34,5 @@
 
 
 ### 참고
- - [beom3](http://beom3.tistory.com/30 "JBoss의 AS/EAP 그리고 Wildfly란 무엇일까?")  
+ - 전준식. 『거침없이 배우는 JBoss』. (주) 지앤션, 2014.
+ - [beom3](http://beom3.tistory.com/30 "JBoss의 AS/EAP 그리고 Wildfly란 무엇일까?")
