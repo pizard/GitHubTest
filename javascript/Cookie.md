@@ -15,8 +15,60 @@
  - 아마 보안의 문제나 그 뭐냐 따라다니는 광고? 이런게 이유일 것 같다
  - 쨋든 URL Parameter를 사용하는 방식으로 바꿔야긋다...ㅜ
 
+### SampleCode
+ - URL Parsing 및 쿠키 추가(put)
+	 - url parameter를 확인하고 조건에 따라 1시간 동안 유지되는 쿠키 추가
+
+	```
+ 	$(document).ready(function() {
+		var parser = document.createElement('a'),
+    	searchObject = {},
+    	queries, split, i;
+		parser = parseURL(document.location.href);
+
+		function parseURL(url) {
+	    	// Let the browser do the work
+	    	parser.href = url;
+	    	// Convert query string to object
+	    	queries = parser.search.replace(/^\?/, '').split('&');
+	    	for( i = 0; i < queries.length; i++ ) {
+	    	    split = queries[i].split('=');
+	    	    searchObject[split[0]] = split[1];
+	    	}
+	    	return {
+	        	protocol: parser.protocol,
+	        	host: parser.host,
+	       		hostname: parser.hostname,
+	        	port: parser.port,
+	        	searchObject: searchObject,
+	        	hash: parser.hash
+	    	};
+		}
+		if(parser.searchObject.parameter_check == 'check_value'){
+			var date = new Date();
+			date.setTime(date.getTime() + 60*60*1000); // 60분, 1시간
+			$.cookie('parameter_cookie', searchObject.parameter_cookie, {expires: date, path:'/'});
+		}
+ 	});
+	```
+
+ - 쿠키 확인
+ 	```
+ 	function cookieCheck(check_value) {
+		if(check_value == $.cookie('parameter_cookie')){
+			// check_value와 cookie의 값이 일치한 경우
+		}else{
+			// check_value와 cookie의 값이 다른 경우
+		}
+		return null;
+	}
+ 	```
+
+
 ### 참고
  - [werty](http://naminsik.com/blog/1864 "werty") / [쿡래빗XE센터](http://xecenter.com/xe/open_tip/4684 "werty")
 	 - jQuery.cookie.js 사용법
  - [Jinolog](http://jinolog.com/programming/etc/2011/11/13/sharing-cookies-across-multiple-domains.html "여러 도메인들 간 쿠키 공유하기")
 	 - 여러 도메인들 간 쿠키 공유하기
+ - [abeautifulsite](https://www.abeautifulsite.net/parsing-urls-in-javascript "Parsing URL, in JavaScript")
+ 	 - SampleCode > URL 파싱부분 참고
