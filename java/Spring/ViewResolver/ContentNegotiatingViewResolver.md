@@ -85,7 +85,7 @@
 	</bean>
  	```
  	 - xml에 관한 DTO 모델을 선언할 때 XML 마샬링(Marshalling)을 해줘야 한다
-
+ 	 - 
 
 
  창조적 고찰 http://ismydream.tistory.com/139 ContentNegotiatingViewResolver 이해하기
