@@ -80,7 +80,7 @@
 
 ### SampleCode
  - Client 설정
-<img src="../image/jQuery/jsonp/jsonp_client.png"></img>
+<img src="../image/javascript/jsonp/jsonp_client.png"></img>
 	 - 필수 처리
 	 	 - `type:"GET"`
 	 	 	 - GET방식만 가능
@@ -96,7 +96,7 @@
 			 - 서버에서 돌려받은 데이터를 감쌈
 			 - 해당 Function을 거친 후 Success로 이동  
  - Server 설정(Spring MVC 기준)
-<img src="../image/jQuery/jsonp/jsonp_server.png"></img>
+<img src="../image/javascript/jsonp/jsonp_server.png"></img>
 	 - json값들을 callBack으로 묶어서 return
 	 - `callBack({ "result":"success" });`
 

@@ -1,7 +1,7 @@
 #RESTful API
 ## REST란?
- - REST란 REpresentational State Transfer의 약자
- - 장비간 통신을 위해 CORBRA, RPC, SOAP등의 복잡한 방법대신 간단하게 HTTP를 이용
+ - REpresentational State Transfer의 약자
+ - 장비간 통신을 위해 CORBRA, RPC, SOAP등 의 복잡한 방법 대신 간단하게 HTTP를 이용
  - 자원 지향 구조(Resource Oriented Architecture) 웹 사이트의 이미지, 텍스트, DB 내용 등의 모든 자원에 고유한 URI 부여
 
 ## CRUD
