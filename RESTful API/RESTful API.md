@@ -36,3 +36,18 @@
  	 - 클라이언트는 직접 최종서버에 붙었는지 등을 알 수 없습니다.
  - Code-On-Demand
  	 - 서버로부터 스크립트를 받아서 Client에서 실행하는 것
+
+## HttpMessageConverters
+ - getForObject(), postForLocation(), put() 으로 넘겨지고 반환되는 객체들은 HttpMessageConverters에 의해 HTTP 요청으로 변환되고 HTTP응답으로부터 변환된다.
+ - 주요 MIME 타입과 자바 타입을 위한 변환기(converter)는 기본적으로 등록되지만, 직접 변환기를 작성하고 RestTemplate에 끼워 넣을 수 있다.
+ - 종류
+ 	 - StringHttpMessageConverter
+ 	 - FromHttpMessageConverter
+ 	 - ByteArrayMessageConverter
+ 	 - MarshallingHttpMessageConverter
+ 	 - **MappingJacksonHttpMessageConverter**
+ 	 - SourceHttpMessageConverter
+ 	 - BufferedImagedHttpMessageConverter
+
+
+http://seongilman.tistory.com/117
