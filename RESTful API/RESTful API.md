@@ -49,5 +49,9 @@
  	 - SourceHttpMessageConverter
  	 - BufferedImagedHttpMessageConverter
 
+## 추가
+ - DELETE와 PUT의 경우 ajax방식을 통해서만 전달 가능
+ - HTTP에서는 PUT과 DELETE를 지원하지만 HTML에서는 PUT과 DELETE를 지원하지 않고 GET방식만 지원함
+ 	 - 
 
 http://seongilman.tistory.com/117

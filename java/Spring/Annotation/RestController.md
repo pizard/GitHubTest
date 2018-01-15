@@ -1,0 +1,2 @@
+# RestController
+ - @ResponseBody + @Controller

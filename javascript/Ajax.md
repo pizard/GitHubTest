@@ -51,6 +51,15 @@
  	 	 	 - ex. `jsonp text xml`: JSONP 요청을 text로 수신하고 XML로 해석
  	 	 	 - ex. `jsonp xml`: 먼저 jsonp를 xml으로 전환을 시도하고 실패시 jsonp를 text로 전환 그 후 text를 xml로 전환
 
+ - method
+ 	 - default: 'GET'
+ 	 - Type: String
+ 	 - 요청을 보내기 위한 HTTP method('POST', 'GET', 'PUT')
+ - type
+ 	 - default: 'GET'
+ 	 - Type: String
+ 	 - method라 불린다.
+ 	 - jQuery 1.9.0이전의 버젼들은 type을 사용해야만 한다.
 
   - error
  	 - Type: Function(jqXHR jqXHR, String textStatus, String errorThrown)
@@ -69,6 +78,21 @@
  - 보안 상의 이유로 브라우저들은 스크립트 내에서 초기화되는 cross-origin HTTP 요청을 제한합니다.
 
  
+## Type vs Method
+ - 새로운 버전에서 명칭이 바뀐거임
+
+## 와우..., 상세 조사 및 정리 필요
+ - 일단 DELETE, PUT 같은 경우 RequestParam을 받질 못함
+ - ReqeustBody의 형태로 받아야하는데
+ - 이게 또 form태그로 보낼때 추가되는 application/x-www-form-urlencoded의 Content-Type으로는 보안상 전송이 안됨
+ - 그렇기 때문에 /json 또는 /xml의 형식으로 전송해야하고, 데이터를 JSON형식으로 바꿔야함
+	 - JSON.stringify($("#frm").serializeArray()사용
+	 - https://stackoverflow.com/questions/22195065/how-to-send-a-json-object-using-html-form-data
+
+## ERROR 
+ - Required String parameter '인자아!' is not present
+ 	 - 인자로 넘어오는 값이 없다는 의미
+ 	 - defaultValue를 설정해 주거나 값을 제대로 넘겨 주거나
 
 ## 참고
  - [api.jQuery](http://api.jquery.com/jquery.ajax/ "jQuery")
