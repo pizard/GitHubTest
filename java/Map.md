@@ -7,3 +7,5 @@
  	 - [LinkedHashMap](./ViewResolver/InternalResourceViewResolver.md)
  	 - [SortedMap](./ViewResolver/InternalResourceViewResolver.md)
  	 - [TreeMap](./ViewResolver/InternalResourceViewResolver.md)
+
+## Map vs HashMap

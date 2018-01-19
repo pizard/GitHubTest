@@ -66,8 +66,14 @@
  		 - jqXHR(jQuery 1.4.x, XMLHttpRequest): 예외 처리된 object와 발생한 에러의 타입
  		 - textStatus: "null", "timeout", "error", "abort", "parsererror"
  		 - errorThrown: HTTP에러가 발생한 경우, HTTP의 원문 일부를 받는다("Not Found", "Internal Server Error") 
- 		 	 - 1.5 jQuery이후, `erroe`환경은 함수의 array들을 받을 수 있음
- 		 	 - 각 함수는 
+ 		 	 - 1.5 jQuery이후, `error`환경은 함수의 array들을 받을 수 있음
+ 	 - Sample
+ 	 	```
+ 	 	error : function(request,status,error){
+    		console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+    		alert("통신에 문제가 발생했습니다. \n잠시 후 다시 시도해주십시오.");
+    	}
+ 	 	```
  - success
  	 - Type: Function(Anything data, String, textStatus, jqXHR jqXHR)
  	 	 - 1.5 jQuery이후, 
