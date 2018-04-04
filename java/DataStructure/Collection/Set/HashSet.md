@@ -21,29 +21,28 @@
 
 ## Method
  - 고유
- 	 - add(E e)
- 	 	 - return Type: boolean
+ 	 - `public boolean add(E e)`
  	 	 - 해당 set에 특정 element e가 없는경우 e를 추가
- 	 - clear()
- 	 	 - return Type: void
+ 	 	 - 해당 e를 추가한 경우 true 반환
+ 	 - `public void clear()`
  	 	 - 해당 set의 모든 요소들을 제거
- 	 - clone()
- 	 	 - return Type: Object
+ 	 - `public Object clone()`
  	 	 - 해당 HashSet의 객체를 얕은 복사(shallow copy)하여 반환한다.
- 	 - contains(Object o)
- 	 	 - return Type: boolean
- 	 - isEmpty()
- 	 	 - return Type: boolean
- 	 - iterator()
- 	 	 - return Type: boolean
- 	 - remove(Object o)
- 	 	 - return Type: boolean
- 	 - size()
- 	 	 - return Type: boolean
+ 	 - `public boolean contains(Object o)`
+ 	 	 - 해당 set이 특정 element을 포함한 경우 true 반환
+ 	 - `public boolean isEmpty()`
+ 	 	 - 해당 set의 element가 없는경우 true 반환
+ 	 - `public Iterator iterator()`
+ 	 	 - 해당 set의 모든 element를 iterator로 반환
+ 	 - `public boolean remove(Object o)`
+ 	 	 - 해당 set에서 특정 element이 존재하는 경우 삭제
+ 	 - `public int size()`
+ 	 	 - 해당 set의 element의 개수를 반환(cardinality)
+
  - inherited from java.util.AbstractSet
  	 - equals()
  	 - hashCode()
- 	 - removeAll
+ 	 - removeAll()
  - inherited from java.util.AbstractCollection
  	 - addAll()
  	 - containAll()
@@ -68,8 +67,11 @@
 
 
 ## 참고
- - http://sysnet.pe.kr/221026178373
+ - [oracle](https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html "Class HashSet<E>")
+	 - 젠부!
+ - [techshare](http://sysnet.pe.kr/221026178373 "Shallow Copy와 Deep Copy")
 	 - 얕은 복사(shallow copy)
 	 	 - 객체가 가진 멤버의 값들을 새로운 객체로 복사하는데 객체가 참조 타입의 멤버를 갖고 있으면 참조 값(Referece Value)만 복사
 	 - 깊은 복사(deep copy)
 	 	 - 해당 객체를 복사할 때, 필드 유형이 참조 타입의 멤버일지라도 별도의 메모리에 개별 인스턴스로 복사
+	 - 추후 다른곳으로 이동!
