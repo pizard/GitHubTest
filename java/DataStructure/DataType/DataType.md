@@ -1,0 +1,112 @@
+# Data Type
+## 1. Primitive Types(기본형)
+ - 특징
+ 	 - 사용하기 전에 선언(Declared) 되어야 함
+ 	 - OS에 따라 자료형의 길이가 변하지 않음
+ 	 - 비객체 타입, null을 가질 수 없음
+ - 종류
+	 - Boolean Type(boolean)
+	 - Numeric Type
+	 	 - Integer Type
+	 	 	 - Integer Type(short, int, long)
+	 	 	 - Floating Point Type(float, double)
+	 	 - Character Type(char)
+ - 상세
+ 	 - byte
+ 	 	 - 8bit의 2진(Two's Complement) 정수
+ 	 	 - 범위: -128 ~ 127
+ 	 	 - default: 0
+ 	 	 - 거대한 배열에서 메모리를 아끼는데 유용함
+ 	 	 - 코드에서 범위가 명확한 경우 int를 대체할 수 있음
+ 	 - short
+ 	 	 - 16bit의 2진 정수
+ 	 	 - 범위: -32,768 ~ 32,767
+ 	 	 - default: 0
+ 	 	 - byte와 같이 같은 적용 지침을 갖고 있음
+ 	 - int
+ 	 	 - 32bit의 2진 정수
+ 	 	 - 범위: -2^32 ~ 2^31-1
+ 	 	 - default: 0
+ 	 	 - Java SE 8이후로, unsigned 32-bit 정수의 대표로도 int를 사용, 0 ~ 2^32-1
+ 	 	 - int를 unsigned integer로써 사용하기 위해 Integer class를 사용한다.
+ 	 - long
+ 	 	 - 64bit의 2진 정수
+ 	 	 - 범위
+ 	 	 	 - signed long: -2^63 ~ 2^63-1
+ 	 	 	 - unsigned long: 0 ~ 2^64-1(Java SE 8 이후)
+ 	 	 - default: 0L
+ 	 	 - INT보다 넓은 범위가 필요한 경우 사용
+ 	 - float
+ 	 	 - 32bit의 단정밀도(single precision) IEEE 754형식의 부동소수점
+ 	 	 - 범위: 매우! 매우! 넓음(참고 https://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.2.3)
+ 	 	 - default: 0.0f
+ 	 	 - 화폐와 같은 정확도가 필요한 경우 대신 매우 거대한 부동소수점 수에서 적합함
+ 	 - double
+ 	 	 - 64bit의 배정밀도(double precision) IEEE 754형식의 부동소수점
+ 	 	 - 범위: 매우! 매우! 넓음(참고 https://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.2.3)
+ 	 	 - default: 0.0d
+ 	 	 - 소수점 값에 대해 default로 사용된다.
+ 	 	 - float와 마찬가지로 정확성이 필요한 경우에는 사용되지 않음
+ 	 - boolean
+ 	 	 - true / false
+ 	 	 - 1bit 정보를 표현하지만 size는 정확하게 정의되어있지 않음
+ 	 	 - default: false
+ 	 - char
+ 	 	 - 16bit의 유니코드 문자
+ 	 	 - 범위: '\u0000'(0) ~ '\uffff'(65,535)
+ 	 	 - default: ''\u0000'
+ - 추가
+ 	 - String
+ 	 	 - 쌍따옴표로 둘러쌓인 문자열은 자동적으로 new `String` 객체로 들어감
+ 	 	 - 한번 만들어지면 불변함
+ 	 	 - 기술적으로 primitive type은 아니지만 언어가 지원하는 특별한 도움 덕분에 그렇게 생각해도 괜찮다
+ 	 	 - default: null
+ - Literals
+ 	 - primitive type은 class로부터 만들어지는 객체가 아님
+ 	 - literal 프로그램 내에 정의되어 있는 그대로 해석되어야 할 고정된 값
+ 	 - 아래와 같이 primitive타입의 변수에 literal을 배정할 수 있다.
+ 	 - ex.
+ 	 	 - `boolean result = true;`
+ 	 	 - `short s = 10000;`
+ 	 	 - `int i = 1000000`
+ - Integer Literals
+ 	 - L 또는 l로 끝나는 long 타입의 literal, 이외의 경우 int
+ 	 - integral 유형인 byte, short, int, long의 값들은 int literals로 만들어질 수 있다.
+ 	 - int 범위를 넘어선 long타입의 값들은 long literals로 부터 만들어진다.
+ 	 - Integer literals는 아래의 수 체계로 표현될 수 있다.
+ 	 	 - Decimal: 10진법(0-9)
+ 	 	 	 - 26 -> 26
+ 	 	 - Hexadecimal: 16진법(0-9, A-F)
+ 	 	 	 - 26 -> 0x1a
+ 	 	 - Binary: 2진법(0,1)
+ 	 	 	 - 26 -> 0b1101
+ - Floating-Point Literals
+ 	 - F 또는 f로 끝나는 float 타입의 literal 이외의 경우 double(D 또는 d로 끝나는 경우 포함)
+ 	 - E 또는 e(과학적 표기법), F 또는 f(32-bit float literal) 그리고 D 또는 d(64-bit double literal)로 표현되기도 한다.
+ 	 	 - Double
+ 	 	 	 - 123.4 -> 123.4e2
+ 	 	 - Float
+ 	 	 	 - 123.4f
+
+
+## 2. Reference Type(참조형)
+ - 특징
+ 	 - java.lang.Object를 상속음
+ 	 - 선언형 자료형이 기본형이 아닌경우 참조형(String)
+ - 종류
+	 - Class Type
+	 	 - 객체를 참조하는 형태
+	 	 - 실제 객체가 아닌 객체의 주소를 가짐
+	 - Interface Type
+	 - Array Type
+	 - Enum Type
+	 - etc...
+
+
+
+
+## 참고
+ - [oracle](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html "Primitive Data Types")
+	 - Primitive Types > 상세, Literal, Integer Literals, Floating-point Literals
+ - [경영학도의 좌충우돌 프로그래밍](http://whatisthenext.tistory.com/146 "단정도(single precision), 배정도(double precision)이란?")
+	 - single precision / double precision
