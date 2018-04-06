@@ -63,7 +63,23 @@
         </outbound-socket-binding>
     </socket-binding-group>
  	 ```
- 	 
+ - LOG LEVEL
+     - 위치
+         - root-logger 태그
+     - Level
+         - ALL > TRACE > DEBUG > INFO > WARN > ERROR > FATAL > OFF
+     - Level Detail
+         - all: 가장 낮은 수준의 레벨, 모든 로그를 표기
+         - trace: debug보다 finer-grained한 정보들을 표기
+         - Debug: 앱을 debug하는데 유용한 이벤트 정보들을 표기
+         - info: coarse-grained 수준의 앱의 진행에서 중요한 부분을 표기
+         - warn: 잠재적 위험이 있는 상황을 표기
+         - error: 앱이 계속 운영 될 수 있을 정도의 에러 이벤트를 표기
+         - fatal: 아마 앱을 중지로 이끈 이벤트를 표기
+         - off: 가장 높은 수준의 레벨, 어떤 로그도 표기하지 않음
+
+
+
 ## 출처
  - [bgasparotto](https://bgasparotto.com/start-stop-restart-wildfly/ "Start, Stop and Restart Wildfly")
  	 - Start, Stop and Restart Wildfly
