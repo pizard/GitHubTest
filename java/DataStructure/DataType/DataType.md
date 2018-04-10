@@ -55,12 +55,6 @@
  	 	 - 16bit의 유니코드 문자
  	 	 - 범위: '\u0000'(0) ~ '\uffff'(65,535)
  	 	 - default: ''\u0000'
- - 추가
- 	 - String
- 	 	 - 쌍따옴표로 둘러쌓인 문자열은 자동적으로 new `String` 객체로 들어감
- 	 	 - 한번 만들어지면 불변함
- 	 	 - 기술적으로 primitive type은 아니지만 언어가 지원하는 특별한 도움 덕분에 그렇게 생각해도 괜찮다
- 	 	 - default: null
  - Literals
  	 - primitive type은 class로부터 만들어지는 객체가 아님
  	 - literal 프로그램 내에 정의되어 있는 그대로 해석되어야 할 고정된 값
@@ -89,24 +83,49 @@
  	 	 	 - 123.4f
 
 
+
+
 ## 2. Reference Type(참조형)
  - 특징
- 	 - java.lang.Object를 상속음
+ 	 - java.lang.Object를 상속 받음
  	 - 선언형 자료형이 기본형이 아닌경우 참조형(String)
+ 	 - new 연산자를 통해 힙(heap) 영역에 생서됨
  - 종류
 	 - Class Type
 	 	 - 객체를 참조하는 형태
 	 	 - 실제 객체가 아닌 객체의 주소를 가짐
+	 	 - Wrapper Class
+			 - 특징
+			 	 - 기본형은 비객체이기 때문에 null을 사용할 수 없음
+			 	 - Wrapper class는 기본형을 클래스로 감싼 형태로 null을 사용할 수 있음
+			 - 상세
+				 - byte    ->  Byte
+				 - short   ->  Short
+				 - int     ->  Integer
+				 - long    ->  Long
+				 - float   ->  Float
+				 - double  ->  Double
+				 - char    ->  Char
+				 - boolean ->  Boolean
+				 - void	   ->  Void
 	 - Interface Type
 	 - Array Type
+	 	 - 자료형에 []를 선엄함으로서 배열 지정
+	 	 - 배열형 변수 또한 배열의 주소를 갖고 있는 것을 의미함
 	 - Enum Type
 	 - etc...
 
-
-
+### 2.1 String Class
+ - 특징
+	 - 기술적으로는 참조형에 속하지만 기본형처럼 사용
+ 	 - 쌍따옴표로 둘러쌓인 문자열은 자동적으로 new `String` 객체로 들어감
+ 	 - 한번 만들어지면 불변함(immutable)
+ 		 - 어떤 방식을 이용하여 데이터를 바꾼다 해도 새로운 String 객체를 만들어 내는 것
+ 	 - default: null
 
 ## 참고
  - [oracle](https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html "Primitive Data Types")
 	 - Primitive Types > 상세, Literal, Integer Literals, Floating-point Literals
- - [경영학도의 좌충우돌 프로그래밍](http://whatisthenext.tistory.com/146 "단정도(single precision), 배정도(double precision)이란?")
-	 - single precision / double precision
+ - [JDM's Blog](http://jdm.kr/blog/213 "자바 자료형 정리(Java Data Type)")
+	 - Reference Type
+
