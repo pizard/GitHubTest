@@ -69,9 +69,3 @@
 ## 참고
  - [oracle](https://docs.oracle.com/javase/7/docs/api/java/util/HashSet.html "Class HashSet<E>")
 	 - 젠부!
- - [techshare](http://sysnet.pe.kr/221026178373 "Shallow Copy와 Deep Copy")
-	 - 얕은 복사(shallow copy)
-	 	 - 객체가 가진 멤버의 값들을 새로운 객체로 복사하는데 객체가 참조 타입의 멤버를 갖고 있으면 참조 값(Referece Value)만 복사
-	 - 깊은 복사(deep copy)
-	 	 - 해당 객체를 복사할 때, 필드 유형이 참조 타입의 멤버일지라도 별도의 메모리에 개별 인스턴스로 복사
-	 - 추후 다른곳으로 이동!
