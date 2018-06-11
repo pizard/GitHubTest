@@ -1,0 +1,17 @@
+# 4. Big Data
+ - ** BigQuery √ **
+ 	 - 완전 관리형 대규모 데이터 웨어하우스
+ - Cloud Dataflow
+ 	 - 실시간 일괄 처리 및 스트림 데이터 처리
+ - Cloud Dataproc
+ 	 - 관리형 Spark 및 Hadoop 서비스
+ - Cloud Datalab
+ 	 - 대규모 데이터세트 탐색, 분석, 시각화
+ - Cloud Dataprep(Beta)
+ 	 - 분석용 데이터 탐색, 정리, 준비
+ - Cloud Pub/Sub
+ 	 - 다대다 비동기 메시지 서비스
+ - Genomics
+ 	 - 과학 연구에 Google Genomics 활용
+ - Google Data Studio(Beta)
+ 	 - 더 나은 비즈니스 의사 결정을 지원하기 위한 훌륭한 데이터 스토리 전달

@@ -1,0 +1,15 @@
+# 6. Machine Learning
+ - Cloud Machine Learning Engine
+ 	 - 모든 크기 및 데이터 유형에 대한 기계 학습
+ - Cloud Jobs API(Alpa)
+ 	 - 취업정보 사이트에 기계 학습 활용
+ - Cloud Natural Language API
+ 	 - 구조화되지 않은 텍스트에서 정보 도출
+ - Cloud Speech API
+ 	 - ML을 사용해 음성을 텍스트로 변환
+ - Cloud Translation API
+ 	 - 대부분의 언어 쌍을 동적으로 번역
+ - Cloud Vision API
+ 	 - ML을 사용해 이미지에서 정보 도출
+ - Cloud Video Intelligence API(Beta)
+ 	 - 동영상에서 메타데이터 추출

@@ -1,0 +1,11 @@
+# 2. Storage & Database
+ - ** Cloud Storage √ **
+ 	 - 글로벌 엣지 캐싱을 제공하는 객체 저장소
+ - Cloud SQL
+ 	 - 완전 관리형 MySQL 및 postgreSQL 데이터베이스 서비스
+ - Cloud Bigtable
+ 	 - 완전 관리형 NoSQL 데이터베이스 서비스
+ - Cloud Spanner
+ 	 - 중요한 작업 용도의 관계형 데이터베이스 서비스
+ - Cloud Datastore
+ 	 - 비관계형 데이터용 NoSQL 데이터베이스

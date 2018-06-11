@@ -1,0 +1,17 @@
+# 7. ID & Security
+ -  Cloud IAM
+ 	 - 세분화된 ID 및 액세스 관리
+ - Cloud Identity-Aware Proxy(Beta)
+ 	 - ID를 사용하여 액세스 보호
+ - Cloud Data Loss Prevention API(Beta)
+ 	 - 민감한 데이터 탐색 및 수정
+ - Security Key Enforcement
+ 	 - 보안 키로 피싱 방지
+ - Cloud Key Management Service
+ 	 - GCP에서 암호화 키 관리
+ - Cloud Resource Manager
+ 	 - GCP에서 계층적으로 리소스 관리
+ - Cloud Security Scanner
+ 	 - App Engine 앱 자동 스캔
+ - Cloud Platform 보안 개요
+ 	 - Google 보안 모델 알아보기

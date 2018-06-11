@@ -1,0 +1,11 @@
+# 3. Network
+ - Virtual Private Cloud(VPC)
+ 	 - GCP리소스용 VPC 네트워킹
+ - Cloud Load Balancing
+ 	 - 확장 가능한 고성능 부하 분산
+ - Cloud CDN
+ 	 - Google 글로벌 네트워크에서 콘텐츠 전송
+ - Cloud Interconnect
+	 - GCP의 네트워크 엣지에 직접 연결
+ - Cloud DNS
+ 	 - 안정적이면서 탄ㄴ력적이고 지연 시간이 짧은 DNS 제공

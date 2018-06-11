@@ -1,0 +1,27 @@
+# 8. Management Tool
+ - ** [Stackdriver](./1. StackDriver/GOOGLE STACKDRIVER.md) √ **
+ 	 - GCP 및 AWS를 위한 강력한 관리 도구, GOOGLE STACKDRIVER
+ - ** [Monitoring](./2. Monitoring/STACKDRIVER MONITORING.md) √ **
+ 	 - GCP 및 AWS의 애플리케이션 모니터링, STACKDRIVER MONITORING
+ - Logging
+ 	 - GCP 및 AWS의 애플리케이션 로그 기록
+ - Error Reporting
+ 	 - 애플리케이션 오류 식별 및 파악
+ - Trace
+ 	 - 프로덕션 환경에서 성능 문제점 찾기
+ - Debugger
+ 	 - 프로덕션 환경에서 코드 동작 조사
+ - Cloud Deployment Manager
+ 	 - 간단한 템플릿으로 클라우드 리소스 관리
+ - Cloud Endpoints
+ 	 - GCP에서 API 개발, 배포, 관리
+ - Cloud Console
+ 	 - GCP의 통합 관리 콘솔
+ - Cloud Shell
+ 	 - 모든 브라우저에서 명령줄로 관리
+ - Cloud Mobile App
+ 	 - 휴대기기에서 GCP 서비스 관리
+ - Cloud Billing API
+ 	 - 프로그래밍으로 GCP 결제 관리
+ - Cloud API
+ 	 - 모든 GCP 서비스의 프로그래밍 인터페이스
