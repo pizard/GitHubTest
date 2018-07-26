@@ -1,0 +1,81 @@
+#Jsoup
+- 기능
+    - 현실의 HTML을 이용하기 위한 자바 라이브러리
+    - 데이터를 추출하고 다루는데 매우 편리한 기능 제공
+- 특징
+    - URL, 파일, 문자열로부터 HTML을 긁어오고 파싱한다.
+    - DOM traversal 또는 CSS selector를 이용하여 데이터를 검색하고 추출
+    - HTML의 elements, attributes, text를 다룸
+    - XSS 공격을 막기 위하여 사용자 제공 콘텐츠들을
+- 요소
+    - Document
+        - Jsoup이 얻어온 결과, HTML 전체 문서
+    - Elements
+        - Element 모인 자료형, for/while을 이용한 반복문 사용이 가능
+    - Element
+        - Document의 HTML요소
+    - Connetion
+        - Jsoup의 connect 혹은 설정 메소드들을 이용해 만들어지는 객체
+        - 연결을 위한 정보를 담고 있음
+    - Response
+        - Jsoup이 URL에 접속해 얻어온 결과
+        - Document와 달리 status코드, status메시지와 같은 헤더 메시지와 쿠키등을 갖고 있음
+- Method
+    - `parse(String html)`
+    - `parse(String html, String baseUri)`
+    - `parse(String html, String baseUri, Parser parser)`
+        - 기능
+            - HTML파일을 Document파일로 파싱함
+        - parameter
+            - html: 파싱할 HTML
+            - baseUri: <base href>태그 선언 이전에 상대 URL를 절대 URL로 확인하는데 사용
+            - 사용할 대체 파서
+        - return
+            - 온전한 HTML, Document(Type: Document)
+    - `parse(File in, String charsetName, String baseUri) throws IOException`
+    - `parse(File in, String baseUri) throws IOException`
+    - `parse(InputStream in, String charsetName, String baseUri) throws IOException`
+    - `parse(InputStream in, String charsetName, String baseUri, Parser parser) throws IOException`
+        - 기능
+            - 불러온 요소(File, URL, Stream...)를 파싱함
+        - parameter
+            - html, in: 파싱을 할 요소들
+            - baseUri: 상대 링크를 확인하기 위한 HTML검색 URL
+            - charsetName: 파일 내부 문자열 세트, `http-equv` 메타 태그를 확인하기 위해 null을 사용(옵션, ???)
+            - parser: 대신 사용할 parser
+        - return
+            - 온전한 HTML(Type: Document)
+        - IOException
+            - 해당 소스를 찾거나 읽지 못하는 경우 또는 charsetName이 유효하지 않은 경우
+    - `parse(URL url, int timeoutMillis) throws IOException`
+        - 기능
+            - URL을 가져와서 HTML로 파싱함
+        - parameter
+            - url: 가져올 URL(GET방식), protocol은 http/https
+            - timeoutMillis: timeout 시간
+    - `connect(String url)`
+        - 기능
+            - HTML을 가져와 파싱할 URL로의 새로운 Connection을 만듬
+        - parameter
+            -  url: 연결할 URL, protocol은 http/https
+        - return
+            - Connection
+    - `clean(String bodyHtml, String baseUri, Whitelist whitelist)`
+    - `clean(String bodyHtml, whitelist whitelist)`
+    - `clean(String bodyHtml, String baseUri, Whitelist whitelist, Document.OutputSettings outputSettings)`
+        - 기능
+            - 필터링을 통해 HTML에서 위험요소를 제거하여 반환
+        - Parameter
+            - bodyHtml: 믿을 수 없는 HTML
+            - baseUri: 참조 URL
+            - whitelist: 허가될 HTML요소 리스트
+        - return
+            - 안전한 HTML
+### 참고
+- [jsoup.org](https://jsoup.org/apidocs/org/jsoup/Jsoup.html "Class Jsoup")
+    - Method
+- [jsoup.org](https://jsoup.org/apidocs/org/jsoup/nodes/Document.html "Document")
+    - Document
+- [간단한 블로그](http://partnerjun.tistory.com/42, "Java HTML parser, Jsoup로 원하는 값 얻어내기 - 기본")
+    - 요소
+- [에돌이의 얕고 넓은 샘](http://partnerjun.tistory.com/42 "jsoup - 자바를 위한 BeautifulSoup (HTML parser)")
