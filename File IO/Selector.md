@@ -5,7 +5,7 @@
  - 탄생 배경
 	 1. non-Blocking방식은 connect(), accept(), read(), write()메소드에서 블로킹이 없음, 즉시 응답
 	  ➜ 즉 다음과 같은 코드에서 응답이 없는 경우 무한 루프를 돌게 됨
-	  ➜ CPU가 과도하게 소비 
+	  ➜ CPU가 과도하게 소비
 	  ```
 		while (true) {
   		SocketChannel socketChannel = serverSocketChannel.accept();
@@ -18,7 +18,7 @@
 	   ➜ 그동안은 스레드 풀을 통해 해결
 	 3. OS에서 Thread들 간 Context-switching은 높은 비용과 메모리 소모를 요구
 	   ➜ Selector를 통해 하나의 Thread만 사용
- - 특징`
+ - 특징
 	 - Mulltiplex IO 가능(필수는 아니고 효울적임을 의미)
 	   ＊Multiplex IO: 단 하나의 스레드로 동시에 많은 IO채널들을 효율적으로 관리하여 좀 더 적은 CPU와 자원을 소모
 	 - selector에 등록할 수 잇는 채널은 SelectableChannel의 하위 채널만 가능한데 non-blocking 설정 된 것만 가능
@@ -26,7 +26,7 @@
 	 - SelectableChannel 클래스 : 채널로서 관리대상
 	 - Selector 클래스 : 채널 관리자
 	 - SelectionKey 클래스 : 채널들을 다룰때 필요한 정보
-	 - non-blocking I/O의 지원을 해줌	 
+	 - non-blocking I/O의 지원을 해줌
  - 동작 방식
 	 1. Channel은 Selector에 자신을 등록할 때 작업 유형의 키(SelectionKey)로 생성하고, Selector의 관심키셋(interest-set)에 저장
 	 2. 클라이언트가 처리 요청을 하면 Selector는 관심키셋에 등록된 키 중에서 작업 처리 준비가 된 키를 선택해 키셋(selected-set)에 별도로 저장
@@ -101,7 +101,7 @@
 		 - selector에 해당 채널이 등록되어 있는지 확인
 	 - `public abstract int validOps()`
 		 - 현재 채널의 입쳘력 동작을 리턴(read/write/accept/connect)
-		 - 서버 소켓 채널의 경우 OP_ACCEPT만 가능 
+		 - 서버 소켓 채널의 경우 OP_ACCEPT만 가능
 
 ### SelectionKey 클래스
  - 특정 채널과 셀렉터 사이의 등록 관계 캡슐화

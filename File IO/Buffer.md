@@ -2,7 +2,7 @@
 ## NIO의 Buffer 클래스
  - NIO에서는 데이터의 입출력하기 위해 항상 버퍼를 사용
  - 정의
-	 - **읽고 쓰기가 가능**한 메모리 배열
+	 - **읽고 쓰기가 가능** 한 메모리 배열
  - 특징
 	 - 운영체제의 커널이 관리하는 **시스템 메모리를 직접 사용** 할 수 있다.
 	 - byte[]의 경우 JVM의 힙 영역에 메모리가 할당되고 바이트 배열의 초기값이 시스템 메모리로 한번 복사 되어야 한다.(Nondirect에서 설명)
@@ -17,7 +17,7 @@
 ### 2. 메모리 위치(Direct Buffer)
  - 정의
 	 - 운영체제가 관리하는 메모리 공간을 이용하는 버퍼
-	 
+
  - 특징
 	 - 운영체제의 메모리를 할당받기 위해 운영체제의 네이티브 C함수를 호출해야 하고 여러 잡다한 처리를 해야 하므로 상대적으로 생성이 느림
 	 ➜ 자주 생성하기 보다는 한번 생성 후 재사용이 하는 것이 적합함
@@ -66,7 +66,7 @@
 
 ### 4. Direct Buffer vs NonDirectBuffer
  - NonDirectBuffer
- 	 - 
+ 	 -
 
 ## byte 해석순서(ByteOrder)
  - Big Endian
@@ -134,15 +134,15 @@
  - int의 경우 Bytebuffer로 받은 후 asIntBuffer()를 통해 변환해야 함
 	```
 	int[] writeData = { 10, 20, 30, 50, 70 };
-	IntBuffer writeIntBuffer = IntBuffer.wrap(writeData); 
+	IntBuffer writeIntBuffer = IntBuffer.wrap(writeData);
 	ByteBuffer writeByteBuffer = ByteBuffer.allocate(writeIntBuffer.capacity() * 4);
- 
+
 	for (int i = 0; i < writeIntBuffer.capacity(); i++) {
 		writeByteBuffer.putInt(writeIntBuffer.get(i));
 	}
- 
+
 	writeByteBuffer.flip();
- 
+
 	ByteBuffer readByteBuffer = writeByteBuffer;
 	IntBuffer readIntBuffer = readByteBuffer.asIntBuffer();
 	int[] readData = new int[readIntBuffer.capacity()];
@@ -155,6 +155,6 @@
 	 - 메모리의 위치
 	 - 버퍼의 위치
  	 - 갓갓갓갓갓 사랑합니다♡
- - [Developer](http://devshock.tistory.com/52?category=692562 "Developer")	
+ - [Developer](http://devshock.tistory.com/52?category=692562 "Developer")
 	 - 공통 메소드 함수... etc
 	 - 메모리의 위치
